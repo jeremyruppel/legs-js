@@ -158,30 +158,6 @@
 	};
 	
 	//-----------------------------------
-	//  Reflect
-	//-----------------------------------
-	
-	Legs.Reflect = 
-	{
-		NAME : '__name__',
-		
-		Namespace : function( object, prefix )
-		{
-			prefix = ( !prefix ) ? '' : ( prefix + '.' );
-			
-			for( var child in object )
-			{
-				if( typeof object[ child ] === 'object' )
-				{
-					object[ child ][ this.NAME ] = prefix + child;
-					
-					this.Namespace( object[ child ], object[ child ][ this.NAME ] );
-				}
-			}
-		}
-	};
-	
-	//-----------------------------------
 	//  Event
 	//-----------------------------------
 	
@@ -507,9 +483,6 @@
 		// mix in our context base afterwards
 		Legs.Utils.Mixin( this.Events, Legs.ContextBase.Events );
 		
-		// namespace our actors for debugging
-		Legs.Reflect.Namespace( this.Actors );
-		
 		// default event dispatcher implementation
 		this.EventDispatcher = new Legs.EventDispatcher( );
 		
@@ -535,15 +508,6 @@
 	
 	Legs.Actor = function( factory )
 	{
-		this[ Legs.Reflect.NAME ] = factory[ Legs.Reflect.NAME ] || 'anonymous';
-		
-		this.log = function( message )
-		{
-			if( console && console.log )
-			{
-				console.log( this[ Legs.Reflect.NAME ] + ': ' + message );
-			}
-		};
 	};
 	
 	Legs.Model = function( assembly )
