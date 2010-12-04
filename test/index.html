@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Legs.js Test Suite</title>
+	<meta name="generator" content="TextMate http://macromates.com/">
+	<meta name="author" content="Jeremy Ruppel">
+	<!-- Date: 2010-11-18 -->
+	<!-- qunit css -->
+	<link rel="stylesheet" href="assets/css/qunit.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<!-- qunit js -->
+	<script src="assets/js/qunit.js" charset="utf-8"></script>
+	<!-- jquery js (dependency) -->
+	<script src="../lib/jquery.js" charset="utf-8"></script>
+	<script src="../lib/jquery.livequery.js" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		( function( $, livequery )
+		{
+			/*
+				utility function to clear out livequery queue, 
+				totally necessary in testing the mediator map
+				as the default expire( ) calls fn2 (remove function)
+				for every element as they expire (DO NOT WANT)
+			*/
+			$.extend( $.livequery, 
+				{
+					reset : function( )
+					{
+						$.livequery.guid = 0;
+						$.livequery.queue = [ ];
+						$.livequery.queries = [ ];
+					}
+				} );
+		} )( jQuery );
+	</script>
+	<!-- legs js -->
+	<script src="../src/legs.js" charset="utf-8"></script>
+	<!-- legs test suite -->
+	<script src="assets/js/suite/commandmap.js" charset="utf-8"></script>
+	<script src="assets/js/suite/context.js" charset="utf-8"></script>
+	<script src="assets/js/suite/event.js" charset="utf-8"></script>
+	<script src="assets/js/suite/eventdispatcher.js" charset="utf-8"></script>
+	<script src="assets/js/suite/eventmap.js" charset="utf-8"></script>
+	<script src="assets/js/suite/injector.js" charset="utf-8"></script>
+	<script src="assets/js/suite/model.js" charset="utf-8"></script>
+	<script src="assets/js/suite/mediatormap.js" charset="utf-8"></script>
+	<script src="assets/js/suite/view.js" charset="utf-8"></script>
+	<script src="assets/js/suite/utils/dictionary.js" charset="utf-8"></script>
+	<script src="assets/js/suite/utils/element.js" charset="utf-8"></script>
+	<script src="assets/js/suite/utils/isfactory.js" charset="utf-8"></script>
+	<script src="assets/js/suite/utils/mixin.js" charset="utf-8"></script>
+	<script src="assets/js/suite/reflect/namespace.js" charset="utf-8"></script>
+</head>
+<body>
+	<h1 id="qunit-header">Legs.js - QUnit Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="qunit-fixture">test markup</div>
+	<div id="app-context"></div>
+</body>
+</html>
