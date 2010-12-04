@@ -516,6 +516,16 @@
 		{
 			var prototype = new Legs.Actor( this );
 			
+			if( !dispatch )
+			{
+				Legs.Utils.Mixin( prototype, new Legs.EventDispatcher( ) );
+				
+				dispatch = function( event )
+				{
+					prototype.dispatch( event );
+				};
+			}
+			
 			assembly.apply( prototype, [ Events, dispatch ] );
 			
 			return prototype;
