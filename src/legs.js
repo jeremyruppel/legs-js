@@ -58,7 +58,7 @@
 		{
 			this._mappings = [ ];
 			
-			this.put = function( key, value )
+			var find = function( key, block )
 			{
 				var mapping;
 				
@@ -68,62 +68,48 @@
 					
 					if( mapping.key === key )
 					{
-						mapping.value = value;
-						
-						return;
-					}
-				}
-				
-				this._mappings.push( { key : key, value : value } );
-			};
-			
-			this.get = function( key )
-			{
-				var mapping;
-				
-				for( var i = 0; i < this._mappings.length; i++ )
-				{
-					mapping = this._mappings[ i ];
-					
-					if( mapping.key === key )
-					{
-						return mapping.value;
+						return block.call( this, mapping, i );
 					}
 				}
 				
 				return null;
 			};
 			
+			this.put = function( key, value )
+			{
+				if( find.call( this, key, function( mapping )
+				{
+					mapping.value = value; 
+					
+					return true;
+					
+				} ) ){ return; }
+				
+				this._mappings.push( { key : key, value : value } );
+			};
+			
+			this.get = function( key )
+			{
+				return find.call( this, key, function( mapping )
+				{
+					return mapping.value;
+				} );
+			};
+			
 			this.has = function( key )
 			{
-				var mapping;
-				
-				for( var i = 0; i < this._mappings.length; i++ )
+				return true === find.call( this, key, function( mapping )
 				{
-					mapping = this._mappings[ i ];
-					
-					if( mapping.key === key )
-					{
-						return true;
-					}
-				}
-				
-				return false;
+					return true;
+				} );
 			};
 			
 			this.remove = function( key )
 			{
-				var mapping;
-				
-				for( var i = 0; i < this._mappings.length; i++ )
+				find.call( this, key, function( mapping, index )
 				{
-					mapping = this._mappings[ i ];
-					
-					if( mapping.key === key )
-					{
-						this._mappings.splice( i, 1 );
-					}
-				}
+					this._mappings.splice( index, 1 );
+				} );
 			};
 		},
 		
