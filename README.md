@@ -1,6 +1,6 @@
 # Legs.js
 
-A JavaScript homage to the RobotLegs micro-architecture.
+A JavaScript homage to the [RobotLegs][robotlegs] micro-architecture.
 
 ## What Legs.js *is*
 
