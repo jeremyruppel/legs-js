@@ -57,7 +57,7 @@
 		Dictionary : function( )
 		{
 			this._mappings = [ ];
-
+			
 			this.put = function( key, value )
 			{
 				var mapping;
@@ -293,10 +293,7 @@
 	
 	Legs.Injector = function( EventDispatcher, Events )
 	{
-		/*
-			TODO use Legs.Utils.Dictionary
-		*/
-		this._mappings = [ ];
+		this._dict = new Legs.Utils.Dictionary( );
 		
 		var dispatch = function( event )
 		{
@@ -310,25 +307,22 @@
 				throw new Error( Legs.Errors.E_INJECTOR_NOTFACTORY );
 			}
 			
-			for( var i = 0; i < this._mappings.length; i++ )
+			if( this._dict.has( factory ) )
 			{
-				if( this._mappings[ i ].factory === factory )
-				{
-					throw new Error( Legs.Errors.E_INJECTOR_OVR );
-				}
+				throw new Error( Legs.Errors.E_INJECTOR_OVR );
 			}
 			
-			this._mappings.push( { factory : factory, create : function( )
+			this._dict.put( factory, { create : function( )
+			{
+				var instance = factory.create( Events, dispatch );
+				
+				this.create = function( )
 				{
-					var instance = factory.create( Events, dispatch );
-					
-					this.create = function( )
-					{
-						return instance;
-					};
-					
 					return instance;
-				} } );
+				};
+				
+				return instance;
+			} } );
 		};
 		
 		this.MapClass = function( factory )
@@ -338,28 +332,22 @@
 				throw new Error( Legs.Errors.E_INJECTOR_NOTFACTORY );
 			}
 			
-			for( var i = 0; i < this._mappings.length; i++ )
+			if( this._dict.has( factory ) )
 			{
-				if( this._mappings[ i ].factory === factory )
-				{
-					throw new Error( Legs.Errors.E_INJECTOR_OVR );
-				}
+				throw new Error( Legs.Errors.E_INJECTOR_OVR );
 			}
 			
-			this._mappings.push( { factory : factory, create : function( )
-				{
-					return factory.create( Events, dispatch );
-				} } );
+			this._dict.put( factory, { create : function( )
+			{
+				return factory.create( Events, dispatch );
+			} } );
 		};
 		
 		this.Get = function( factory )
 		{
-			for( var i = 0; i < this._mappings.length; i++ )
+			if( this._dict.has( factory ) )
 			{
-				if( this._mappings[ i ].factory === factory )
-				{
-					return this._mappings[ i ].create( );
-				}
+				return this._dict.get( factory ).create( );
 			}
 			
 			throw new Error( Legs.Errors.E_INJECTOR_NOMAP );
@@ -367,15 +355,7 @@
 		
 		this.Has = function( factory )
 		{
-			for( var i = 0; i < this._mappings.length; i++ )
-			{
-				if( this._mappings[ i ].factory === factory )
-				{
-					return true;
-				}
-			}
-			
-			return false;
+			return this._dict.has( factory );
 		};
 	};
 	
