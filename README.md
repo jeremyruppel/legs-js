@@ -14,6 +14,8 @@ In the meantime, it's a good way to decouple, organize, and wire up your applica
 
 A dependency injection framework. Let's get serious.
 
+Oh also, production ready. Until we hit that 1.0.0, use at your own risk.
+
 ## Main Concepts Borrowed from RobotLegs
 
 - Single event bus to decouple framework actors
