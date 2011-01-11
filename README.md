@@ -206,8 +206,11 @@ A view could be created like this:
 				input : '.input-box',
 				submit : '#submit-button'
 			},
-			render( data )
+			function( data )
 			{
+				// this method is automatically applied to the 
+				// view as 'render'
+				
 				// if your view is dynamic, you can render it with
 				// your library of choice here
 			} )
