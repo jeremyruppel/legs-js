@@ -175,7 +175,7 @@
 			
 			var callbacks = this._callbacks[ type ] || ( this._callbacks[ type ] = [ ] );
 			
-			if( callbacks.indexOf( callback ) == -1 )
+			if( $.inArray( callback, callbacks ) == -1 )
 			{
 				callbacks.push( callback );
 			}
