@@ -6,7 +6,8 @@ test( 'creates element with correct tag name', 3, function( )
 	
 	equal( Legs.Utils.Element( 'li' ).tagName, 'LI', 'tag name is li' );
 	
-	equal( Legs.Utils.Element( 'custom' ).tagName, 'CUSTOM', 'tag name is custom' );
+	// custom tag names don't have to be uppercase
+	equal( Legs.Utils.Element( 'custom' ).tagName.toLowerCase( ), 'custom', 'tag name is custom' );
 } );
 
 test( 'element with no tag name defaults to div', 4, function( )
