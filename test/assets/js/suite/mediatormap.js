@@ -10,7 +10,7 @@ module( 'MediatorMap',
 	{
 		$.livequery.reset( );
 		
-		$( '#mediate-me', '#test-context' ).expire( );
+		$( '.mediate-me', '#test-context' ).expire( );
 		$( '#app-context' ).empty( );
 	}
 } );
@@ -21,7 +21,7 @@ test( 'livequery reset clears out the livequery queue', 1, function( )
 {
 	stop( );
 	
-	$( '#mediate-me', '#test-context' ).livequery( 
+	$( '.mediate-me', '#test-context' ).livequery( 
 		function( )
 		{
 			ok( true, 'an element was added' );
@@ -35,7 +35,7 @@ test( 'livequery reset clears out the livequery queue', 1, function( )
 			ok( false, 'an element was removed but the queue should have been cleared before we got to this assertion' );
 		} );
 	
-		$( '#test-context' ).append( '<div id="mediate-me" />' );
+		$( '#test-context' ).append( '<div class="mediate-me" />' );
 		
 		setTimeout( start, 100 );
 } );
@@ -44,21 +44,21 @@ test( 'livequery announces removed nodes on a per node basis', 1, function( )
 {
 	stop( );
 	
-	$( '#mediate-me', '#test-context' ).livequery(
+	$( '.mediate-me', '#test-context' ).livequery(
 		function( )
 		{
-			if( this.className === 'two' )
+			if( this.id === 'two' )
 			{
 				$( this ).remove( );
 			}
 		},
 		function( )
 		{
-			ok( this, 'removed view class ' + this.className );
+			ok( this, 'removed view id ' + this.id );
 		} );
 		
-	$( '#test-context' ).append( '<div id="mediate-me" class="one" />' );
-	$( '#test-context' ).append( '<div id="mediate-me" class="two" />' );
+	$( '#test-context' ).append( '<div class="mediate-me" id="one"></div>' );
+	$( '#test-context' ).append( '<div class="mediate-me" id="two"></div>' );
 	
 	setTimeout( start, 100 );
 } );
@@ -71,7 +71,7 @@ test( 'automatically maps factories in injector', 2, function( )
 	
 	var map = new Legs.MediatorMap( $( '#test-context' ), injector );
 	
-	var view = new Legs.View( '#mediate-me', { } );
+	var view = new Legs.View( '.mediate-me', { } );
 	
 	var mediator = new Legs.Mediator( function( Events, dispatch ){ } );
 	
@@ -88,7 +88,7 @@ test( 'creates mediator for mediated view selector', 3, function( )
 	
 	var map = new Legs.MediatorMap( $( '#test-context' ), new Legs.Injector( new Legs.EventDispatcher( ), { } ) );
 	
-	var view = new Legs.View( '#mediate-me', { } );
+	var view = new Legs.View( '.mediate-me', { } );
 	
 	var mediator = new Legs.Mediator( function( Events, dispatch )
 	{
@@ -98,13 +98,13 @@ test( 'creates mediator for mediated view selector', 3, function( )
 		{
 			ok( true, 'mediator.onregister is called' );
 			
-			equal( view.element.id, 'mediate-me', 'view passed to mediator in onregister has correct id' );
+			equal( view.element.className, 'mediate-me', 'view passed to mediator in onregister has correct class' );
 		};
 	} );
 	
 	map.MapView( view, mediator );
 	
-	$( '#test-context' ).append( '<div id="mediate-me" />' );
+	$( '#test-context' ).append( '<div class="mediate-me" />' );
 	
 	setTimeout( start, 100 );
 } );
@@ -115,7 +115,7 @@ test( 'view receives correct element when added', 1, function( )
 	
 	var map = new Legs.MediatorMap( $( '#test-context' ), new Legs.Injector( new Legs.EventDispatcher( ), { } ) );
 	
-	var view = new Legs.View( '#mediate-me', { } );
+	var view = new Legs.View( '.mediate-me', { } );
 	
 	var element = view.createElement( );
 	
@@ -140,7 +140,7 @@ test( 'removes mediator for mediated view selector', 4, function( )
 	
 	var map = new Legs.MediatorMap( $( '#test-context' ), new Legs.Injector( new Legs.EventDispatcher( ), { } ) );
 	
-	var view = new Legs.View( '#mediate-me', { } );
+	var view = new Legs.View( '.mediate-me', { } );
 	
 	var mediator = new Legs.Mediator( function( Events, dispatch )
 	{
@@ -157,7 +157,7 @@ test( 'removes mediator for mediated view selector', 4, function( )
 		{
 			ok( true, 'mediator.onremove is called' );
 			
-			equal( view.element.id, 'mediate-me', 'view passed to mediator in onremove has correct id' );
+			equal( view.element.className, 'mediate-me', 'view passed to mediator in onremove has correct class' );
 		};
 	} );
 	
@@ -178,7 +178,7 @@ test( 'one mediator is created per view', 6, function( )
 	
 	var map = new Legs.MediatorMap( $( '#test-context' ), new Legs.Injector( dispatcher, events ) );
 	
-	var view = new Legs.View( '#mediate-me', { } );
+	var view = new Legs.View( '.mediate-me', { } );
 	
 	var mediator = new Legs.Mediator( function( Events, dispatch )
 	{
@@ -215,9 +215,9 @@ test( 'a mediator is only removed when its view is removed', 5, function( )
 	
 	var map = new Legs.MediatorMap( $( '#test-context' ), new Legs.Injector( dispatcher, events ) );
 	
-	var one = new Legs.View( '#mediate-me.stick-around', { } );
+	var one = new Legs.View( '.mediate-me#stick-around', { } );
 	
-	var two = new Legs.View( '#mediate-me.get-deleted', { } );
+	var two = new Legs.View( '.mediate-me#get-deleted', { } );
 	
 	var mediator = new Legs.Mediator( function( Events, dispatch )
 	{
@@ -227,7 +227,7 @@ test( 'a mediator is only removed when its view is removed', 5, function( )
 		{
 			ok( true, 'mediator.onregister is called' );
 			
-			if( view.element.className == 'get-deleted' )
+			if( view.element.id == 'get-deleted' )
 			{
 				$( view.element ).remove( );
 			}
@@ -246,7 +246,7 @@ test( 'a mediator is only removed when its view is removed', 5, function( )
 	dispatcher.listen( events.VIEW_REMOVED, function( event )
 	{
 		// should only get one of these
-		equal( event.data.element.className, 'get-deleted', 'only get-deleted view is removed' );
+		equal( event.data.element.id, 'get-deleted', 'only get-deleted view is removed' );
 	} );
 	
 	$( '#test-context' ).append( one.createElement( ) );
