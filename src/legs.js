@@ -4,7 +4,7 @@
 	//  Namespace
 	//-----------------------------------
 	
-	var Legs = this.Legs = { VERSION : '0.0.2' };
+	var Legs = this.Legs = { VERSION : '0.0.3' };
 	
 	Legs.Errors = 
 	{
