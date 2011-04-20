@@ -76,6 +76,16 @@ describe( 'Legs.Class', function( )
       expect( Class.create ).toBeType( 'function' );
     } );
     
+    it( 'should extend an extended class with any options given', function( )
+    {
+      var Class = Legs.Class.extend( { custom : 123, awesome : 'sauce' } );
+      
+      var instance = Class.create( { custom : 456} );
+      
+      expect( instance.awesome ).toEqual( 'sauce' );
+      expect( instance.custom ).toEqual( 456 );
+    } );
+    
     it( 'should preserve inheritance on a subclass', function( )
     {
       var Class = Legs.Class.extend( );

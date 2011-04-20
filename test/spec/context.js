@@ -158,6 +158,24 @@ describe( 'Legs.Context', function( )
       expect( spy ).toHaveBeenCalled( );
     } );
     
+    it( 'should call the postStartup method when initialized', function( )
+    {
+      var spy = jasmine.createSpy( 'postStartup' );
+      
+      var context = Legs.Context.create( { postStartup : spy } );
+      
+      expect( spy ).toHaveBeenCalled( );
+    } );
+    
+    it( 'should not call the postStartup method if autoStartup is false', function( )
+    {
+      var spy = jasmine.createSpy( 'postStartup' );
+      
+      var context = Legs.Context.create( { postStartup : spy, autoStartup : false } );
+      
+      expect( spy ).not.toHaveBeenCalled( );
+    } );
+    
     it( 'should trigger the startup complete event after startup', function( )
     {
       var spy = jasmine.createSpy( 'startup complete handler' );

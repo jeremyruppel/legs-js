@@ -270,11 +270,12 @@
     {
       initialize : function( )
       {
-        this.events     = Legs.Events.create( this.events );
+        // Merge in any user defined events
+        this.events = Legs.Events.create( this.events );
         /*
           TODO would be nice to have *all* of these use the create( ) factory method
         */
-        this.injector   = new Legs.Injector( );
+        this.injector = new Legs.Injector( );
         this.commandMap = new Legs.CommandMap( this.events, this.injector );
         
         this.startup( );
@@ -283,12 +284,17 @@
         
         if( this.autoStartup )
         {
-          this.events.trigger( 'startup complete' );
+          this.postStartup( );
         }
       },
       
       startup : function( )
       {
+      },
+      
+      postStartup : function( )
+      {
+        this.events.trigger( this.events.STARTUP_COMPLETE );
       },
       
       autoStartup : true,
