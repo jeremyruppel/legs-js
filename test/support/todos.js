@@ -1,5 +1,10 @@
 var TodosContext = Legs.Context.extend(
   {
+    events :
+    {
+      TODO_CREATED : 'todo created'
+    },
+    
     actors :
     {
       Todos : Legs.Actor.extend( 
@@ -44,6 +49,14 @@ var TodosContext = Legs.Context.extend(
               this.reset( );
             } ) );
             
+            this.element.keydown( this.proxy( function( event )
+            {
+              if( event.which === 13 )
+              {
+                this.submit( );
+              }
+            } ) );
+            
             this.reset( );
           },
           
@@ -55,6 +68,11 @@ var TodosContext = Legs.Context.extend(
           clear : function( )
           {
             this.element.val( '' );
+          },
+          
+          submit : function( )
+          {
+            this.trigger( this.events.TODO_CREATED, this.element.val( ) );
           }
         } )
     },

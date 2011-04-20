@@ -78,7 +78,10 @@ describe( 'a sample todos application', function( )
   
   describe( 'application events', function( )
   {
-    
+    it( 'should have a todo created event', function( )
+    {
+      expect( context.events.TODO_CREATED ).toEqual( 'todo created' );
+    } );
   } );
   
   describe( 'application actors', function( )
@@ -199,22 +202,45 @@ describe( 'a sample todos application', function( )
         expect( view.element.val( ) ).toEqual( 'What needs to be done?' );
       } );
       
-      it( 'should clear the text when clicked', function( )
+      describe( 'event handling', function( )
       {
-        view.element.click( );
+        it( 'should call clear when clicked', function( )
+        {
+          spyOn( view, 'clear' );
+
+          view.element.click( );
+
+          expect( view.clear ).toHaveBeenCalled( );
+        } );
+
+        it( 'should call reset when blurred', function( )
+        {
+          spyOn( view, 'reset' );
+
+          view.element.blur( );
+
+          expect( view.reset ).toHaveBeenCalled( );
+        } );
         
-        expect( view.element.val( ) ).toEqual( '' );
-      } );
-      
-      it( 'should reset the text when blurred', function( )
-      {
-        view.element.click( );
+        it( 'should call submit when enter is pressed', function( )
+        {
+          spyOn( view, 'submit' );
+
+          view.element.trigger( { type : 'keydown', which : 13 } );
+          
+          expect( view.submit ).toHaveBeenCalled( );
+        } );
         
-        expect( view.element.val( ) ).toEqual( '' );
-        
-        view.element.blur( );
-        
-        expect( view.element.val( ) ).toEqual( 'What needs to be done?' );
+        it( 'should not call submit when other keys are pressed', function( )
+        {
+          spyOn( view, 'submit' );
+          
+          view.element.trigger( { type : 'keydown', which : 12 } );
+          view.element.trigger( { type : 'keydown', which : 45 } );
+          view.element.trigger( { type : 'keydown', which : 14 } );
+          
+          expect( view.submit ).not.toHaveBeenCalled( );
+        } );
       } );
       
       describe( 'instance methods', function( )
@@ -264,6 +290,38 @@ describe( 'a sample todos application', function( )
             view.clear( );
             
             expect( view.element.val( ) ).toEqual( '' );
+          } );
+        } );
+        
+        describe( 'submit', function( )
+        {
+          it( 'should be defined', function( )
+          {
+            expect( view.submit ).toBeType( 'function' );
+          } );
+          
+          it( 'should trigger a todo created event on the context', function( )
+          {
+            var spy = jasmine.createSpy( );
+            
+            context.events.bind( context.events.TODO_CREATED, spy );
+            
+            view.submit( );
+            
+            expect( spy ).toHaveBeenCalled( );
+          } );
+          
+          it( 'should pass the input value along with the event', function( )
+          {
+            var spy = jasmine.createSpy( );
+            
+            context.events.bind( context.events.TODO_CREATED, spy );
+            
+            view.element.val( 'buy some beer' );
+            
+            view.submit( );
+            
+            expect( spy ).toHaveBeenCalledWith( 'buy some beer' );
           } );
         } );
       } );
