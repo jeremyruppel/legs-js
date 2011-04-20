@@ -8,7 +8,25 @@ describe( 'a sample todos application', function( )
   
   beforeEach( function( )
   {
-    context = TodosContext.create( { autoStartup : false } );
+    context = TodosContext.create(
+      {
+        autoStartup : false,
+        
+        has : function( name )
+        {
+          return this.injector.hasMapping( name );
+        },
+        
+        is : function( name, clazz )
+        {
+          return this.injector.getInstance( name ) instanceof clazz;
+        },
+        
+        get : function( name )
+        {
+          return this.injector.getInstance( name );
+        }
+      } );
   } );
   
   //-----------------------------------
@@ -45,7 +63,28 @@ describe( 'a sample todos application', function( )
   
   describe( 'application actors', function( )
   {
-    
+    describe( 'Todos collection', function( )
+    {
+      it( 'should be defined', function( )
+      {
+        expect( context.actors.Todos ).toBeDefined( );
+      } );
+      
+      it( 'should be mapped in the injector', function( )
+      {
+        expect( context.has( 'todos' ) ).toBe( true );
+      } );
+      
+      it( 'should be mapped to the correct class', function( )
+      {
+        expect( context.is( 'todos', context.actors.Todos ) ).toBe( true );
+      } );
+      
+      it( 'should be an instance of Todos', function( )
+      {
+        expect( context.get( 'todos' ) ).toBeAnInstanceOf( context.actors.Todos );
+      } );
+    } );
   } );
   
   describe( 'application commands', function( )
