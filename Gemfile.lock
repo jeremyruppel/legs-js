@@ -3,6 +3,11 @@ GEM
   specs:
     execjs (0.1.1)
     json (1.5.1)
+    mustache (0.99.3)
+    rdiscount (1.6.8)
+    rocco (0.6)
+      mustache
+      rdiscount
     uglifier (0.5.0)
       execjs (~> 0.1.0)
       json
@@ -11,4 +16,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  mustache (~> 0.99.3)
+  rdiscount (~> 1.6.8)
+  rocco (~> 0.6)
   uglifier (~> 0.5.0)

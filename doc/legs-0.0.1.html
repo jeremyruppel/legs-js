@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <title>legs.js</title>
+  <link rel="stylesheet" href="http://github.com/jashkenas/docco/raw/0.3.0/resources/docco.css">
+</head>
+<body>
+<div id='container'>
+  <div id="background"></div>
+  <table cellspacing=0 cellpadding=0>
+  <thead>
+    <tr>
+      <th class=docs><h1>legs.js</h1></th>
+      <th class=code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id='section-1'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-1">&#182;</a>
+        </div>
+        
+      </td>
+      <td class=code>
+        <div class='highlight'><pre><span class="p">(</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">$</span> <span class="p">)</span>
+<span class="p">{</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-Core'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Core">&#182;</a>
+        </div>
+        <hr />
+
+<h2> Core</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  
+  <span class="kd">var</span> <span class="nx">Legs</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">Legs</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">VERSION</span> <span class="o">:</span> <span class="s1">&#39;0.0.1&#39;</span> <span class="p">};</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-Class'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Class">&#182;</a>
+        </div>
+        <hr />
+
+<h2> Class</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  
+  <span class="nx">Legs</span><span class="p">.</span><span class="nx">Class</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+  <span class="p">{</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-4'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-4">&#182;</a>
+        </div>
+        <p>Set up a placeholder constructor</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">this</span><span class="p">.</span><span class="nx">initialize</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">};</span>
+  <span class="p">};</span>
+  
+  <span class="nx">Legs</span><span class="p">.</span><span class="nx">Class</span><span class="p">.</span><span class="nx">extend</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">attributes</span> <span class="p">)</span>
+  <span class="p">{</span></pre></div>
+      </td>
+    </tr>
+    <tr id='section-5'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-5">&#182;</a>
+        </div>
+        <p>Create the new class</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="kd">var</span> <span class="nx">New</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">initialize</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span> <span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span> <span class="p">);</span>
+    <span class="p">};</span>
+    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-6'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-6">&#182;</a>
+        </div>
+        <p>Clone this extend method</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="nx">New</span><span class="p">.</span><span class="nx">extend</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">extend</span><span class="p">;</span>
+    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-7'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-7">&#182;</a>
+        </div>
+        <p>Clone this create method</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="nx">New</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">create</span><span class="p">;</span>
+    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-8'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-8">&#182;</a>
+        </div>
+        <p>Begin building the prototype off of this class</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="kd">var</span> <span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="k">this</span><span class="p">(</span> <span class="p">);</span>
+    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-9'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-9">&#182;</a>
+        </div>
+        <p>Set all of the properties on the prototype</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">prototype</span><span class="p">,</span> <span class="nx">attributes</span> <span class="p">);</span>
+    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-10'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-10">&#182;</a>
+        </div>
+        <p>Set the prototype appropriately</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="nx">New</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">prototype</span><span class="p">;</span>
+    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-11'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-11">&#182;</a>
+        </div>
+        <p>Return the new class</p>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>    <span class="k">return</span> <span class="nx">New</span><span class="p">;</span>
+  <span class="p">};</span>
+  
+  <span class="nx">Legs</span><span class="p">.</span><span class="nx">Class</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">attributes</span> <span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span> <span class="nx">attributes</span> <span class="p">)</span> <span class="p">)(</span> <span class="p">);</span>
+  <span class="p">};</span>
+    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-Events'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Events">&#182;</a>
+        </div>
+        <hr />
+
+<h2> Events</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  
+  <span class="nx">Legs</span><span class="p">.</span><span class="nx">Events</span> <span class="o">=</span> <span class="nx">Legs</span><span class="p">.</span><span class="nx">Class</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span>
+    <span class="p">{</span>
+      <span class="nx">initialize</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">mappings</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">STARTUP_COMPLETE</span> <span class="o">=</span> <span class="s1">&#39;startup complete&#39;</span><span class="p">;</span>
+      <span class="p">},</span>
+      
+      <span class="nx">callbacks</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">type</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">mappings</span><span class="p">[</span> <span class="nx">type</span> <span class="p">]</span> <span class="o">||</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">mappings</span><span class="p">[</span> <span class="nx">type</span> <span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="p">]</span> <span class="p">);</span>
+      <span class="p">},</span>
+      
+      <span class="nx">bind</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">callback</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">callbacks</span><span class="p">(</span> <span class="nx">type</span> <span class="p">).</span><span class="nx">push</span><span class="p">(</span> <span class="nx">callback</span> <span class="p">);</span>
+      <span class="p">},</span>
+      
+      <span class="nx">unbind</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">callback</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">callbacks</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">callbacks</span><span class="p">(</span> <span class="nx">type</span> <span class="p">);</span>
+        
+        <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">inArray</span><span class="p">(</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">callbacks</span> <span class="p">);</span>
+        
+        <span class="k">if</span><span class="p">(</span> <span class="nx">index</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span> <span class="p">)</span>
+        <span class="p">{</span>
+          <span class="nx">callbacks</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span> <span class="nx">index</span><span class="p">,</span> <span class="mi">1</span> <span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      
+      <span class="nx">trigger</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">type</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">makeArray</span><span class="p">(</span> <span class="nx">arguments</span> <span class="p">);</span>
+        
+        <span class="nx">$</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">callbacks</span><span class="p">(</span> <span class="nx">args</span><span class="p">.</span><span class="nx">shift</span><span class="p">(</span> <span class="p">)</span> <span class="p">)</span> <span class="p">).</span><span class="nx">each</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">callback</span> <span class="p">)</span>
+        <span class="p">{</span>
+          <span class="nx">callback</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">args</span> <span class="p">);</span>
+        <span class="p">}</span> <span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="p">);</span>
+    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-Injector'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Injector">&#182;</a>
+        </div>
+        <hr />
+
+<h2> Injector</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  
+  <span class="nx">Legs</span><span class="p">.</span><span class="nx">Injector</span> <span class="o">=</span> <span class="nx">Legs</span><span class="p">.</span><span class="nx">Class</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span>
+    <span class="p">{</span>
+      <span class="nx">initialize</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">mappings</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
+      <span class="p">},</span>
+      
+      <span class="nx">mapValue</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">mappings</span><span class="p">[</span> <span class="nx">name</span> <span class="p">]</span> <span class="o">=</span> <span class="p">(</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+        <span class="p">{</span>
+          <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
+        <span class="p">}</span> <span class="p">);</span>
+      <span class="p">},</span>
+      
+      <span class="nx">mapClass</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">clazz</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">mappings</span><span class="p">[</span> <span class="nx">name</span> <span class="p">]</span> <span class="o">=</span> <span class="p">(</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+        <span class="p">{</span>
+          <span class="k">return</span> <span class="k">new</span> <span class="nx">clazz</span><span class="p">(</span> <span class="p">);</span>
+        <span class="p">}</span> <span class="p">);</span>
+      <span class="p">},</span>
+      
+      <span class="nx">mapSingleton</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">clazz</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">mappings</span><span class="p">[</span> <span class="nx">name</span> <span class="p">]</span> <span class="o">=</span> <span class="p">(</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+        <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">clazz</span><span class="p">(</span> <span class="p">);</span>
+          
+          <span class="k">this</span><span class="p">.</span><span class="nx">mapValue</span><span class="p">(</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">instance</span> <span class="p">);</span>
+          
+          <span class="k">return</span> <span class="nx">instance</span><span class="p">;</span>
+        <span class="p">}</span> <span class="p">);</span>
+      <span class="p">},</span>
+      
+      <span class="nx">injectInto</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">subject</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span> <span class="kd">var</span> <span class="nx">attribute</span> <span class="k">in</span> <span class="nx">subject</span> <span class="p">)</span>
+        <span class="p">{</span>
+          <span class="k">if</span><span class="p">(</span> <span class="sr">/^_/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span> <span class="nx">attribute</span> <span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">$</span><span class="p">.</span><span class="nx">type</span><span class="p">(</span> <span class="nx">subject</span><span class="p">[</span> <span class="nx">attribute</span> <span class="p">]</span> <span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;string&#39;</span> <span class="p">)</span>
+          <span class="p">{</span>
+            <span class="nx">subject</span><span class="p">[</span> <span class="nx">attribute</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span> <span class="mi">1</span> <span class="p">)</span> <span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getInstance</span><span class="p">(</span> <span class="nx">subject</span><span class="p">[</span> <span class="nx">attribute</span> <span class="p">]</span> <span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+        
+        <span class="k">return</span> <span class="nx">subject</span><span class="p">;</span>
+      <span class="p">},</span>
+      
+      <span class="nx">getInstance</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">name</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">mappings</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span> <span class="nx">name</span> <span class="p">)</span> <span class="p">)</span>
+        <span class="p">{</span>
+          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span> <span class="s1">&#39;Legs.Injector cannot find any mapping named &quot;&#39;</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39;&quot;.&#39;</span> <span class="p">);</span>
+        <span class="p">}</span>
+        
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">injectInto</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">mappings</span><span class="p">[</span> <span class="nx">name</span> <span class="p">].</span><span class="nx">call</span><span class="p">(</span> <span class="k">this</span> <span class="p">)</span> <span class="p">);</span>
+      <span class="p">},</span>
+      
+      <span class="nx">hasMapping</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">name</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">mappings</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span> <span class="nx">name</span> <span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="p">);</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-Base'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Base">&#182;</a>
+        </div>
+        <hr />
+
+<h2> Base</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  
+  <span class="nx">Legs</span><span class="p">.</span><span class="nx">Base</span> <span class="o">=</span> <span class="nx">Legs</span><span class="p">.</span><span class="nx">Class</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span>
+    <span class="p">{</span>
+      <span class="nx">_events</span>   <span class="o">:</span> <span class="s1">&#39;events&#39;</span><span class="p">,</span>
+      <span class="nx">_injector</span> <span class="o">:</span> <span class="s1">&#39;injector&#39;</span><span class="p">,</span>
+      <span class="nx">trigger</span>   <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">trigger</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">,</span> <span class="nx">arguments</span> <span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="p">);</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-Actor'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Actor">&#182;</a>
+        </div>
+        <hr />
+
+<h2> Actor</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  
+  <span class="nx">Legs</span><span class="p">.</span><span class="nx">Actor</span> <span class="o">=</span> <span class="nx">Legs</span><span class="p">.</span><span class="nx">Base</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span>
+    <span class="p">{</span>
+    <span class="p">}</span> <span class="p">);</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-Command'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Command">&#182;</a>
+        </div>
+        <hr />
+
+<h2> Command</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  
+  <span class="nx">Legs</span><span class="p">.</span><span class="nx">Command</span> <span class="o">=</span> <span class="nx">Legs</span><span class="p">.</span><span class="nx">Base</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span>
+    <span class="p">{</span>
+      <span class="nx">execute</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+      <span class="p">{</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="p">);</span>
+  </pre></div>
+      </td>
+    </tr>
+    <tr id='section-Command_Map'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Command_Map">&#182;</a>
+        </div>
+        <hr />
+
+<h2> Command Map</h2>
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  
+  <span class="nx">Legs</span><span class="p">.</span><span class="nx">CommandMap</span> <span class="o">=</span> <span class="nx">Legs</span><span class="p">.</span><span class="nx">Class</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span>
+    <span class="p">{</span>
+      <span class="nx">initialize</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">events</span><span class="p">,</span> <span class="nx">injector</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">events</span>   <span class="o">=</span> <span class="nx">events</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">injector</span> <span class="o">=</span> <span class="nx">injector</span><span class="p">;</span>
+        <span class="cm">/*</span>
+<span class="cm">          TODO add super( ) support to Legs.Class</span>
+<span class="cm">        */</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">mappings</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
+      <span class="p">},</span>
+      
+      <span class="cm">/*</span>
+<span class="cm">        TODO create superclass and share this method with Legs.Events</span>
+<span class="cm">      */</span>
+      <span class="nx">callbacks</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">type</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">mappings</span><span class="p">[</span> <span class="nx">type</span> <span class="p">]</span> <span class="o">||</span> <span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">mappings</span><span class="p">[</span> <span class="nx">type</span> <span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="p">]</span> <span class="p">);</span>
+      <span class="p">},</span>
+      
+      <span class="nx">mapEvent</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">commandClass</span><span class="p">,</span> <span class="nx">oneShot</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+        <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">command</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">injector</span><span class="p">.</span><span class="nx">injectInto</span><span class="p">(</span> <span class="k">new</span> <span class="nx">commandClass</span><span class="p">(</span> <span class="p">)</span> <span class="p">);</span>
+          
+          <span class="k">if</span><span class="p">(</span> <span class="nx">oneShot</span> <span class="o">===</span> <span class="kc">true</span> <span class="p">)</span>
+          <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">unmapEvent</span><span class="p">(</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">commandClass</span> <span class="p">);</span>
+          <span class="p">}</span>
+          
+          <span class="nx">command</span><span class="p">.</span><span class="nx">execute</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span> <span class="nx">command</span><span class="p">,</span> <span class="nx">arguments</span> <span class="p">);</span>
+        <span class="p">};</span>
+        
+        <span class="kd">var</span> <span class="nx">mapping</span> <span class="o">=</span> 
+        <span class="p">{</span>
+          <span class="nx">commandClass</span> <span class="o">:</span> <span class="nx">commandClass</span><span class="p">,</span>
+          <span class="nx">callback</span>     <span class="o">:</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span> <span class="nx">callback</span><span class="p">,</span> <span class="k">this</span> <span class="p">)</span>
+        <span class="p">};</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">callbacks</span><span class="p">(</span> <span class="nx">type</span> <span class="p">).</span><span class="nx">push</span><span class="p">(</span> <span class="nx">mapping</span> <span class="p">);</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">mapping</span><span class="p">.</span><span class="nx">callback</span> <span class="p">);</span>
+      <span class="p">},</span>
+      
+      <span class="nx">unmapEvent</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">commandClass</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">mappings</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">callbacks</span><span class="p">(</span> <span class="nx">type</span> <span class="p">);</span>
+        
+        <span class="nx">$</span><span class="p">(</span> <span class="nx">mappings</span> <span class="p">).</span><span class="nx">each</span><span class="p">(</span> <span class="nx">$</span><span class="p">.</span><span class="nx">proxy</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">mapping</span> <span class="p">)</span>
+        <span class="p">{</span>
+          <span class="k">if</span><span class="p">(</span> <span class="nx">mapping</span><span class="p">.</span><span class="nx">commandClass</span> <span class="o">===</span> <span class="nx">commandClass</span> <span class="p">)</span>
+          <span class="p">{</span>
+            <span class="nx">mappings</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span> <span class="nx">index</span><span class="p">,</span> <span class="mi">1</span> <span class="p">);</span>
+            
+            <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">unbind</span><span class="p">(</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">mapping</span><span class="p">.</span><span class="nx">callback</span> <span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">},</span> <span class="k">this</span> <span class="p">)</span> <span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="p">);</span>
+    </pre></div>
+      </td>
+    </tr>
+    <tr id='section-Context'>
+      <td class=docs>
+        <div class="pilwrap">
+          <a class="pilcrow" href="#section-Context">&#182;</a>
+        </div>
+        <hr />
+
+<h2> Context</h2>
+
+      </td>
+      <td class=code>
+        <div class='highlight'><pre>  
+  <span class="nx">Legs</span><span class="p">.</span><span class="nx">Context</span> <span class="o">=</span> <span class="nx">Legs</span><span class="p">.</span><span class="nx">Class</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span>
+    <span class="p">{</span>
+      <span class="nx">initialize</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">events</span>     <span class="o">=</span> <span class="nx">Legs</span><span class="p">.</span><span class="nx">Events</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">events</span> <span class="p">);</span>
+        <span class="cm">/*</span>
+<span class="cm">          TODO would be nice to have *all* of these use the create( ) factory method</span>
+<span class="cm">        */</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">injector</span>   <span class="o">=</span> <span class="k">new</span> <span class="nx">Legs</span><span class="p">.</span><span class="nx">Injector</span><span class="p">(</span> <span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">commandMap</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Legs</span><span class="p">.</span><span class="nx">CommandMap</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">injector</span> <span class="p">);</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">startup</span><span class="p">(</span> <span class="p">);</span>
+        
+        <span class="k">this</span><span class="p">.</span><span class="nx">mapInjections</span><span class="p">(</span> <span class="p">);</span>
+        
+        <span class="k">if</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">autoStartup</span> <span class="p">)</span>
+        <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span> <span class="s1">&#39;startup complete&#39;</span> <span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      
+      <span class="nx">startup</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+      <span class="p">{</span>
+      <span class="p">},</span>
+      
+      <span class="nx">autoStartup</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+      
+      <span class="nx">mapInjections</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="p">)</span>
+      <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">injector</span><span class="p">.</span><span class="nx">mapValue</span><span class="p">(</span> <span class="s1">&#39;events&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">events</span> <span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">injector</span><span class="p">.</span><span class="nx">mapValue</span><span class="p">(</span> <span class="s1">&#39;injector&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">injector</span> <span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">injector</span><span class="p">.</span><span class="nx">mapValue</span><span class="p">(</span> <span class="s1">&#39;commandmap&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">commandMap</span> <span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="p">);</span>
+  
+<span class="p">}</span> <span class="p">)(</span> <span class="nx">jQuery</span> <span class="p">);</span></pre></div>
+      </td>
+    </tr>
+  </table>
+</div>
+</body>
