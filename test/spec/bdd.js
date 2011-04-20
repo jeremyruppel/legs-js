@@ -28,10 +28,25 @@ describe( 'a sample todos application', function( )
         maps : function( event, command )
         {
           return this.commandMap.hasEventCommand( event, command );
+        },
+        
+        execute : function( command )
+        {
+          this.commandMap.execute( command );
+        },
+        
+        find : function( selector )
+        {
+          return $( selector, this.contextView );
         }
       } );
     
-    context = TodosContext.create( { autoStartup : false } );
+    context = TodosContext.create( { autoStartup : false, contextView : $( '#context' ) } );
+  } );
+  
+  afterEach( function( )
+  {
+    context.contextView.empty( );
   } );
   
   //-----------------------------------
@@ -122,6 +137,22 @@ describe( 'a sample todos application', function( )
       it( 'should be mapped to the startup complete event', function( )
       {
         expect( context.maps( context.events.STARTUP_COMPLETE, context.commands.CreateViewsCommand ) ).toBe( true );
+      } );
+      
+      it( 'should create the title of the app', function( )
+      {
+        expect( context.find( 'h1' ).length ).toEqual( 0 );
+        
+        context.execute( context.commands.CreateViewsCommand );
+        
+        expect( context.find( 'h1' ).length ).toEqual( 1 );
+      } );
+      
+      it( 'should put the right text in the title', function( )
+      {
+        context.execute( context.commands.CreateViewsCommand );
+        
+        expect( context.find( 'h1' ).text( ) ).toEqual( 'Todos' );
       } );
     } );
   } );

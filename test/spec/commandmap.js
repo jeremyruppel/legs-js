@@ -197,6 +197,67 @@ describe( 'Legs.CommandMap', function( )
       } );
     } );
     
+    describe( 'execute', function( )
+    {
+      it( 'should be defined', function( )
+      {
+        expect( commandMap.execute ).toBeType( 'function' );
+      } );
+      
+      it( 'should execute an instance of the given command', function( )
+      {
+        var spy = jasmine.createSpy( );
+        
+        var Command = Legs.Command.extend( { execute : spy } );
+        
+        commandMap.execute( Command );
+        
+        expect( spy ).toHaveBeenCalled( );
+      } );
+      
+      it( 'should execute a different instance every time', function( )
+      {
+        var spy = jasmine.createSpy( );
+        
+        var Command = Legs.Command.extend( { execute : spy } );
+        
+        commandMap.execute( Command );
+        
+        var one = spy.mostRecentCall.object;
+        
+        commandMap.execute( Command );
+        
+        var two = spy.mostRecentCall.object;
+        
+        expect( one ).not.toBe( two );
+      } );
+      
+      it( 'should fill dependencies on the command instance', function( )
+      {
+        var Command = Legs.Command.extend(
+          {
+            execute : function( )
+            {
+              expect( this.events ).toBe( events );
+              expect( this.injector ).toBe( injector );
+            }
+          } );
+        
+        commandMap.execute( Command );
+      } );
+      
+      it( 'should pass any other arguments to the execute block', function( )
+      {
+        var spy = jasmine.createSpy( );
+        
+        var Command = Legs.Command.extend( { execute : spy } );
+        
+        commandMap.execute( Command, 123, 'hello', false );
+        
+        expect( spy ).toHaveBeenCalledWith( 123, 'hello', false );
+      } );
+    } );
+    
   } );
   
   describe( 'command dependencies', function( )

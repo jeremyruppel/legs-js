@@ -15,7 +15,11 @@ var TodosContext = Legs.Context.extend(
     {
       CreateViewsCommand : Legs.Command.extend(
         {
-          
+          _contextView : 'contextview',
+          execute : function( )
+          {
+            this.contextView.append( '<h1>Todos</h1>' );
+          }
         } )
     },
     

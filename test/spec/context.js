@@ -43,6 +43,11 @@ describe( 'Legs.Context', function( )
     {
       expect( context.commandMap ).toBeAnInstanceOf( Legs.CommandMap );
     } );
+    
+    it( 'should have a context view', function( )
+    {
+      expect( context.contextView ).toBeDefined( );
+    } );
   } );
   
   describe( 'events', function( )
@@ -110,6 +115,11 @@ describe( 'Legs.Context', function( )
     it( 'should map the command map in the injector', function( )
     {
       expect( context.injector.hasMapping( 'commandmap' ) ).toBe( true );
+    } );
+    
+    it( 'should map the context view in the injector', function( )
+    {
+      expect( context.injector.hasMapping( 'contextview' ) ).toBe( true );
     } );
   } );
   

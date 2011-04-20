@@ -144,6 +144,17 @@ describe( 'Legs.Class', function( )
       expect( Class.create( ).custom ).toBeDefined( );
       expect( Legs.Class.create( ).custom ).not.toBeDefined( );
     } );
+    
+    it( 'should use the prototype chain to attach the attributes', function( )
+    {
+      var Child = Legs.Class.extend( );
+      
+      var GrandChild = Child.extend( );
+      
+      Child.include( { kids : 'these days' } ); // AFTER Child is subclassed!
+      
+      expect( new GrandChild( ).kids ).toEqual( 'these days' );
+    } );
   } );
   
   describe( 'inheritance', function( )

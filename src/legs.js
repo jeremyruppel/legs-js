@@ -282,6 +282,17 @@
         }
         
         return false;
+      },
+      
+      execute : function( )
+      {
+        var args = $.makeArray( arguments );
+        
+        var commandClass = args.shift( );
+        
+        var command = this.injector.injectInto( new commandClass( ) );
+        
+        command.execute.apply( command, args );
       }
     } );
     
@@ -291,6 +302,8 @@
   
   Legs.Context = Legs.Class.extend(
     {
+      contextView : $( document ),
+      
       initialize : function( )
       {
         // Merge in any user defined events
@@ -327,6 +340,7 @@
         this.injector.mapValue( 'events', this.events );
         this.injector.mapValue( 'injector', this.injector );
         this.injector.mapValue( 'commandmap', this.commandMap );
+        this.injector.mapValue( 'contextview', this.contextView );
       }
     } );
   
