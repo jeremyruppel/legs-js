@@ -105,6 +105,47 @@ describe( 'Legs.Class', function( )
     } );
   } );
   
+  describe( 'using the include method', function( )
+  {
+    it( 'should be defined', function( )
+    {
+      expect( Legs.Class.include ).toBeDefined( );
+    } );
+    
+    it( 'should be a function', function( )
+    {
+      expect( Legs.Class.include ).toBeType( 'function' );
+    } );
+    
+    it( 'should exist on extended classes', function( )
+    {
+      var Class = Legs.Class.extend( );
+      
+      expect( Class.include ).toBeType( 'function' );
+    } );
+    
+    it( 'should include the given attributes on a class prototype', function( )
+    {
+      var Class = Legs.Class.extend( );
+      
+      expect( new Class( ).custom ).not.toBeDefined( );
+      
+      Class.include( { custom : 123 } );
+      
+      expect( new Class( ).custom ).toEqual( 123 );
+    } );
+    
+    it( 'should not include attributes on the superclass', function( )
+    {
+      var Class = Legs.Class.extend( );
+      
+      Class.include( { custom : 123 } );
+      
+      expect( Class.create( ).custom ).toBeDefined( );
+      expect( Legs.Class.create( ).custom ).not.toBeDefined( );
+    } );
+  } );
+  
   describe( 'inheritance', function( )
   {
     it( 'should be an instance of Class', function( )

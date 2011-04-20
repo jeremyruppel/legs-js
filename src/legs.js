@@ -32,6 +32,9 @@
     // Clone this create method
     New.create = this.create;
     
+    // Clone this include method
+    New.include = this.include;
+    
     // Begin building the prototype off of this class
     var prototype = new this( );
     
@@ -48,6 +51,11 @@
   Legs.Class.create = function( attributes )
   {
     return new ( this.extend( attributes ) )( );
+  };
+  
+  Legs.Class.include = function( attributes )
+  {
+    $.extend( true, this.prototype, attributes );
   };
     
   //-----------------------------------
