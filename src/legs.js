@@ -267,6 +267,21 @@
             this.events.unbind( type, mapping.callback );
           }
         }, this ) );
+      },
+      
+      hasEventCommand : function( type, commandClass )
+      {
+        var mappings = this.callbacks( type );
+        
+        for( var i = 0; i < mappings.length; i++ )
+        {
+          if( mappings[ i ].commandClass === commandClass )
+          {
+            return true;
+          }
+        }
+        
+        return false;
       }
     } );
     

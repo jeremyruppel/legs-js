@@ -8,10 +8,8 @@ describe( 'a sample todos application', function( )
   
   beforeEach( function( )
   {
-    context = TodosContext.create(
+    Legs.Context.include(
       {
-        autoStartup : false,
-        
         has : function( name )
         {
           return this.injector.hasMapping( name );
@@ -25,8 +23,15 @@ describe( 'a sample todos application', function( )
         get : function( name )
         {
           return this.injector.getInstance( name );
+        },
+        
+        maps : function( event, command )
+        {
+          return this.commandMap.hasEventCommand( event, command );
         }
       } );
+    
+    context = TodosContext.create( { autoStartup : false } );
   } );
   
   //-----------------------------------
@@ -84,11 +89,40 @@ describe( 'a sample todos application', function( )
       {
         expect( context.get( 'todos' ) ).toBeAnInstanceOf( context.actors.Todos );
       } );
+      
+      describe( 'instance methods', function( )
+      {
+        var todos;
+        
+        beforeEach( function( )
+        {
+          todos = context.get( 'todos' );
+        } );
+        
+        describe( 'add', function( )
+        {
+          it( 'should be defined', function( )
+          {
+            expect( todos.add ).toBeType( 'function' );
+          } );
+        } );
+      } );
     } );
   } );
   
   describe( 'application commands', function( )
   {
-    
+    describe( 'CreateViewsCommand', function( )
+    {
+      it( 'should be defined', function( )
+      {
+        expect( context.commands.CreateViewsCommand ).toBeDefined( );
+      } );
+      
+      it( 'should be mapped to the startup complete event', function( )
+      {
+        expect( context.maps( context.events.STARTUP_COMPLETE, context.commands.CreateViewsCommand ) ).toBe( true );
+      } );
+    } );
   } );
 } );

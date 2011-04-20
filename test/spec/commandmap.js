@@ -153,6 +153,50 @@ describe( 'Legs.CommandMap', function( )
       } );
     } );
     
+    describe( 'hasEventCommand', function( )
+    {
+      it( 'should be defined', function( )
+      {
+        expect( commandMap.hasEventCommand ).toBeType( 'function' );
+      } );
+      
+      it( 'should return false if a command is not mapped to a given event', function( )
+      {
+        var Command = Legs.Command.extend( );
+        
+        expect( commandMap.hasEventCommand( 'test', Command ) ).toBe( false );
+      } );
+      
+      it( 'should return true if a command is mapped to a given event', function( )
+      {
+        var Command = Legs.Command.extend( );
+        
+        commandMap.mapEvent( 'test', Command );
+        
+        expect( commandMap.hasEventCommand( 'test', Command ) ).toBe( true );
+      } );
+      
+      it( 'should return false if the command is incorrect', function( )
+      {
+        var Command = Legs.Command.extend( );
+        
+        var Oops = Legs.Command.extend( );
+        
+        commandMap.mapEvent( 'test', Command );
+        
+        expect( commandMap.hasEventCommand( 'test', Oops ) ).toBe( false );
+      } );
+      
+      it( 'should return false if the event is incorrect', function( )
+      {
+        var Command = Legs.Command.extend( );
+        
+        commandMap.mapEvent( 'test', Command );
+        
+        expect( commandMap.hasEventCommand( 'oops', Command ) ).toBe( false );
+      } );
+    } );
+    
   } );
   
   describe( 'command dependencies', function( )
