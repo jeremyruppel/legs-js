@@ -22,6 +22,15 @@
     {
       return $.proxy( method, this );
     };
+    
+    // Sugar method to help debug bogus arguments
+    this.ensure = function( obj, type, scope )
+    {
+      if( $.type( obj ) !== type )
+      {
+        throw new Error( scope + ' expected argument type "' + type + '" but got "' + $.type( obj ) + '"' );
+      }
+    };
   };
   
   Legs.Class.extend = function( attributes )
@@ -75,17 +84,6 @@
         this.mappings = { };
         
         this.STARTUP_COMPLETE = 'startup complete';
-      },
-      
-      /*
-        TODO this method might be worth refactoring into Legs.Class by default
-      */
-      ensure : function( obj, type, scope )
-      {
-        if( $.type( obj ) !== type )
-        {
-          throw new Error( scope + ' expected argument type "' + type + '" but got "' + $.type( obj ) + '"' );
-        }
       },
       
       callbacks : function( type )

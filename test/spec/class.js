@@ -324,5 +324,32 @@ describe( 'Legs.Class', function( )
         expect( spy.mostRecentCall.object ).toBe( instance );
       } );
     } );
+    
+    describe( 'ensure', function( )
+    {
+      it( 'should be defined', function( )
+      {
+        expect( instance.ensure ).toBeDefined( );
+      } );
+      
+      it( 'should be a function', function( )
+      {
+        expect( instance.ensure ).toBeType( 'function' );
+      } );
+      
+      it( 'should throw an error if the type is not correct for the given value', function( )
+      {
+        expect( function( )
+        {
+          instance.ensure( 'fail', 'number', 'Some Object' );
+        }
+        ).toThrow( 'Some Object expected argument type "number" but got "string"' );
+      } );
+      
+      it( 'should not throw an error if the types match', function( )
+      {
+        instance.ensure( 123, 'number', 'Another Test' );
+      } );
+    } );
   } );
 } );
