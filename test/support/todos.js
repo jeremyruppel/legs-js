@@ -16,9 +16,47 @@ var TodosContext = Legs.Context.extend(
       CreateViewsCommand : Legs.Command.extend(
         {
           _contextView : 'contextview',
-          execute : function( )
+          _inputView   : 'input',
+          execute      : function( )
           {
             this.contextView.append( '<h1>Todos</h1>' );
+            
+            this.contextView.append( this.inputView.element );
+          }
+        } )
+    },
+    
+    views : 
+    {
+      InputView : Legs.Actor.extend(
+        {
+          element : $( '<input class="input"/>' ),
+          
+          initialize : function( )
+          {
+            this.element.click( $.proxy( function( )
+            {
+              this.clear( );
+            },
+            this ) );
+            
+            this.element.blur( $.proxy( function( )
+            {
+              this.reset( );
+            },
+            this ) );
+            
+            this.reset( );
+          },
+          
+          reset : function( )
+          {
+            this.element.val( 'What needs to be done?' );
+          },
+          
+          clear : function( )
+          {
+            this.element.val( '' );
           }
         } )
     },
@@ -27,6 +65,7 @@ var TodosContext = Legs.Context.extend(
     {
       this.injector.mapSingleton( 'todos', this.actors.Todos );
       
+      this.injector.mapSingleton( 'input', this.views.InputView );
       
       this.commandMap.mapEvent( this.events.STARTUP_COMPLETE, this.commands.CreateViewsCommand );
     }

@@ -154,6 +154,119 @@ describe( 'a sample todos application', function( )
         
         expect( context.find( 'h1' ).text( ) ).toEqual( 'Todos' );
       } );
+      
+      it( 'should create the input view', function( )
+      {
+        expect( context.find( '.input' ).length ).toEqual( 0 );
+        
+        context.execute( context.commands.CreateViewsCommand );
+        
+        expect( context.find( '.input' ).length ).toEqual( 1 );
+      } );
+    } );
+  } );
+  
+  describe( 'application views', function( )
+  {
+    var view;
+    
+    beforeEach( function( )
+    {
+      context.execute( context.commands.CreateViewsCommand );
+      
+      view = context.get( 'input' );
+    } );
+    
+    describe( 'input view', function( )
+    {
+      it( 'should be defined', function( )
+      {
+        expect( context.views.InputView ).toBeDefined( );
+      } );
+      
+      it( 'should be mapped in the injector', function( )
+      {
+        expect( context.has( 'input' ) ).toBe( true );
+      } );
+      
+      it( 'should be mapped to the correct class', function( )
+      {
+        expect( context.is( 'input', context.views.InputView ) ).toBe( true );
+      } );
+      
+      it( 'should have the correct default text', function( )
+      {
+        expect( view.element.val( ) ).toEqual( 'What needs to be done?' );
+      } );
+      
+      it( 'should clear the text when clicked', function( )
+      {
+        view.element.click( );
+        
+        expect( view.element.val( ) ).toEqual( '' );
+      } );
+      
+      it( 'should reset the text when blurred', function( )
+      {
+        view.element.click( );
+        
+        expect( view.element.val( ) ).toEqual( '' );
+        
+        view.element.blur( );
+        
+        expect( view.element.val( ) ).toEqual( 'What needs to be done?' );
+      } );
+      
+      describe( 'instance methods', function( )
+      {
+        describe( 'reset', function( )
+        {
+          it( 'should be defined', function( )
+          {
+            expect( view.reset ).toBeType( 'function' );
+          } );
+          
+          it( 'should display the correct text', function( )
+          {
+            view.reset( );
+            
+            expect( view.element.val( ) ).toEqual( 'What needs to be done?' );
+          } );
+          
+          it( 'should set the correct text when called', function( )
+          {
+            view.element.val( 'wah wah wah' );
+            
+            view.reset( );
+            
+            expect( view.element.val( ) ).toEqual( 'What needs to be done?' );
+          } );
+        } );
+        
+        describe( 'clear', function( )
+        {
+          it( 'should be defined', function( )
+          {
+            expect( view.clear ).toBeType( 'function' );
+          } );
+          
+          it( 'should display no text', function( )
+          {
+            view.clear( );
+            
+            expect( view.element.val( ) ).toEqual( '' );
+          } );
+          
+          it( 'should set the correct text when called', function( )
+          {
+            view.element.val( 'wah wah wah' );
+            
+            view.clear( );
+            
+            expect( view.element.val( ) ).toEqual( '' );
+          } );
+        } );
+      } );
     } );
   } );
 } );
