@@ -56,6 +56,24 @@ describe( 'Legs.Events', function( )
         
         expect( spy ).toHaveBeenCalled( );
       } );
+      
+      it( 'should throw an error if the event type is undefined', function( )
+      {
+        expect( function( )
+        {
+          events.bind( undefined, function( ){ } );
+        }
+        ).toThrow( 'Legs.Events.bind expected argument type "string" but got "undefined"' );
+      } );
+      
+      it( 'should throw an error if the event type is not a string', function( )
+      {
+        expect( function( )
+        {
+          events.bind( 123, function( ){ } );
+        }
+        ).toThrow( 'Legs.Events.bind expected argument type "string" but got "number"' );
+      } );
     } );
     
     describe( 'unbind', function( )
@@ -76,6 +94,24 @@ describe( 'Legs.Events', function( )
         events.trigger( 'test' );
         
         expect( spy ).not.toHaveBeenCalled( );
+      } );
+      
+      it( 'should throw an error if the event type is undefined', function( )
+      {
+        expect( function( )
+        {
+          events.unbind( undefined, function( ){ } );
+        }
+        ).toThrow( 'Legs.Events.unbind expected argument type "string" but got "undefined"' );
+      } );
+      
+      it( 'should throw an error if the event type is not a string', function( )
+      {
+        expect( function( )
+        {
+          events.unbind( 123, function( ){ } );
+        }
+        ).toThrow( 'Legs.Events.unbind expected argument type "string" but got "number"' );
       } );
     } );
     
@@ -131,6 +167,24 @@ describe( 'Legs.Events', function( )
         events.trigger( 'test', 123, 'hello', false );
         
         expect( spy ).toHaveBeenCalledWith( 123, 'hello', false );
+      } );
+      
+      it( 'should throw an error if the event type is undefined', function( )
+      {
+        expect( function( )
+        {
+          events.trigger( undefined );
+        }
+        ).toThrow( 'Legs.Events.trigger expected argument type "string" but got "undefined"' );
+      } );
+      
+      it( 'should throw an error if the event type is not a string', function( )
+      {
+        expect( function( )
+        {
+          events.trigger( 123 );
+        }
+        ).toThrow( 'Legs.Events.trigger expected argument type "string" but got "number"' );
       } );
     } );
   } );

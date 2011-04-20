@@ -46,7 +46,7 @@ describe( 'Legs.Context', function( )
     
     it( 'should have a context view', function( )
     {
-      expect( context.contextView ).toBeDefined( );
+      expect( context.contextView ).toBeAnInstanceOf( $ );
     } );
   } );
   

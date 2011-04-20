@@ -78,9 +78,9 @@ describe( 'a sample todos application', function( )
   
   describe( 'application events', function( )
   {
-    it( 'should have a todo created event', function( )
+    it( 'should have a todo entered event', function( )
     {
-      expect( context.events.TODO_CREATED ).toEqual( 'todo created' );
+      expect( context.events.TODO_ENTERED ).toEqual( 'todo entered' );
     } );
   } );
   
@@ -165,6 +165,19 @@ describe( 'a sample todos application', function( )
         context.execute( context.commands.CreateViewsCommand );
         
         expect( context.find( '.input' ).length ).toEqual( 1 );
+      } );
+    } );
+    
+    describe( 'AddTodoCommand', function( )
+    {
+      it( 'should be defined', function( )
+      {
+        expect( context.commands.AddTodoCommand ).toBeDefined( );
+      } );
+      
+      it( 'should be mapped to the todo entered event', function( )
+      {
+        expect( context.maps( context.events.TODO_ENTERED, context.commands.AddTodoCommand ) );
       } );
     } );
   } );
@@ -300,11 +313,11 @@ describe( 'a sample todos application', function( )
             expect( view.submit ).toBeType( 'function' );
           } );
           
-          it( 'should trigger a todo created event on the context', function( )
+          it( 'should trigger a todo entered event on the context', function( )
           {
             var spy = jasmine.createSpy( );
             
-            context.events.bind( context.events.TODO_CREATED, spy );
+            context.events.bind( context.events.TODO_ENTERED, spy );
             
             view.submit( );
             
@@ -315,7 +328,7 @@ describe( 'a sample todos application', function( )
           {
             var spy = jasmine.createSpy( );
             
-            context.events.bind( context.events.TODO_CREATED, spy );
+            context.events.bind( context.events.TODO_ENTERED, spy );
             
             view.element.val( 'buy some beer' );
             

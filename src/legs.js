@@ -77,6 +77,17 @@
         this.STARTUP_COMPLETE = 'startup complete';
       },
       
+      /*
+        TODO this method might be worth refactoring into Legs.Class by default
+      */
+      ensure : function( obj, type, scope )
+      {
+        if( $.type( obj ) !== type )
+        {
+          throw new Error( scope + ' expected argument type "' + type + '" but got "' + $.type( obj ) + '"' );
+        }
+      },
+      
       callbacks : function( type )
       {
         return this.mappings[ type ] || ( this.mappings[ type ] = [ ] );
@@ -84,11 +95,15 @@
       
       bind : function( type, callback )
       {
+        this.ensure( type, 'string', 'Legs.Events.bind' );
+        
         this.callbacks( type ).push( callback );
       },
       
       unbind : function( type, callback )
       {
+        this.ensure( type, 'string', 'Legs.Events.unbind' );
+        
         var callbacks = this.callbacks( type );
         
         var index = $.inArray( callback, callbacks );
@@ -101,6 +116,8 @@
       
       trigger : function( type )
       {
+        this.ensure( type, 'string', 'Legs.Events.trigger' );
+        
         var args = $.makeArray( arguments );
         
         $( this.callbacks( args.shift( ) ) ).each( function( index, callback )

@@ -2,7 +2,7 @@ var TodosContext = Legs.Context.extend(
   {
     events :
     {
-      TODO_CREATED : 'todo created'
+      TODO_ENTERED : 'todo entered'
     },
     
     actors :
@@ -27,6 +27,14 @@ var TodosContext = Legs.Context.extend(
             this.contextView.append( '<h1>Todos</h1>' );
             
             this.contextView.append( this.inputView.element );
+          }
+        } ),
+      
+      AddTodoCommand : Legs.Command.extend(
+        {
+          execute : function( value )
+          {
+            console.log( value );
           }
         } )
     },
@@ -72,7 +80,7 @@ var TodosContext = Legs.Context.extend(
           
           submit : function( )
           {
-            this.trigger( this.events.TODO_CREATED, this.element.val( ) );
+            this.trigger( this.events.TODO_ENTERED, this.element.val( ) );
           }
         } )
     },
