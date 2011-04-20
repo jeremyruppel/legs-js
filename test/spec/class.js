@@ -273,4 +273,56 @@ describe( 'Legs.Class', function( )
       expect( constructor.mostRecentCall.object ).toBe( user );
     } );
   } );
+  
+  describe( 'instance methods', function( )
+  {
+    var instance;
+    
+    beforeEach( function( )
+    {
+      instance = Legs.Class.create( );
+    } );
+    
+    describe( 'proxy', function( )
+    {
+      it( 'should be defined', function( )
+      {
+        expect( instance.proxy ).toBeDefined( );
+      } );
+      
+      it( 'should be a function', function( )
+      {
+        expect( instance.proxy ).toBeType( 'function' );
+      } );
+      
+      it( 'should return a function', function( )
+      {
+        var result = instance.proxy( function( ){ } );
+        
+        expect( result ).toBeType( 'function' );
+      } );
+      
+      it( 'should wrap the function passed to it', function( )
+      {
+        var spy = jasmine.createSpy( );
+        
+        var proxy = instance.proxy( spy );
+        
+        proxy( );
+        
+        expect( spy ).toHaveBeenCalled( );
+      } );
+      
+      it( 'should run the method passed in the context of that instance', function( )
+      {
+        var spy = jasmine.createSpy( );
+        
+        var proxy = instance.proxy( spy );
+        
+        proxy( );
+        
+        expect( spy.mostRecentCall.object ).toBe( instance );
+      } );
+    } );
+  } );
 } );

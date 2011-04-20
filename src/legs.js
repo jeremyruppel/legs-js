@@ -16,6 +16,12 @@
     this.initialize = function( )
     {
     };
+    
+    // Sugar method to proxy another function in this scope
+    this.proxy = function( method )
+    {
+      return $.proxy( method, this );
+    };
   };
   
   Legs.Class.extend = function( attributes )
@@ -246,7 +252,7 @@
         var mapping = 
         {
           commandClass : commandClass,
-          callback     : $.proxy( callback, this )
+          callback     : this.proxy( callback )
         };
         
         this.callbacks( type ).push( mapping );
@@ -258,7 +264,7 @@
       {
         var mappings = this.callbacks( type );
         
-        $( mappings ).each( $.proxy( function( index, mapping )
+        $( mappings ).each( this.proxy( function( index, mapping )
         {
           if( mapping.commandClass === commandClass )
           {
@@ -266,7 +272,7 @@
             
             this.events.unbind( type, mapping.callback );
           }
-        }, this ) );
+        } ) );
       },
       
       hasEventCommand : function( type, commandClass )

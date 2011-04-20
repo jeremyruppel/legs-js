@@ -34,17 +34,15 @@ var TodosContext = Legs.Context.extend(
           
           initialize : function( )
           {
-            this.element.click( $.proxy( function( )
+            this.element.click( this.proxy( function( )
             {
               this.clear( );
-            },
-            this ) );
+            } ) );
             
-            this.element.blur( $.proxy( function( )
+            this.element.blur( this.proxy( function( )
             {
               this.reset( );
-            },
-            this ) );
+            } ) );
             
             this.reset( );
           },
