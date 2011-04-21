@@ -173,15 +173,15 @@ and place it on the command instance as `foo` (without the underscore).
 
 The injector offers several types of mappings to configure how you want dependencies to be filled:
 
-	- `mapValue` maps an instance or literal for injection. The value injected will be the same every time. It's useful for 
-		application constants, like `this.injector.mapValue( 'host', 'http://localhost:3000' );`
-	
-	- `mapClass` maps a type or class for injection. The value injected will be a new instance of that class every time. All 
-		dependencies on the created instance will be filled recursively. Use it when you will need a new instance of a class 
-		for each actor that depends on it, like `this.injector.mapClass( 'validator', this.utils.Validator );`
-	
-	- `mapSingleton` is like `mapClass`, but once the instance is created, every other dependency will be filled with that 
-		same instance. This is useful for when you only want one of something, like `this.injector.mapSingleton( 'service', this.services.Facebook )`
+- `mapValue` maps an instance or literal for injection. The value injected will be the same every time. It's useful for 
+	application constants, like `this.injector.mapValue( 'host', 'http://localhost:3000' );`
+
+- `mapClass` maps a type or class for injection. The value injected will be a new instance of that class every time. All 
+	dependencies on the created instance will be filled recursively. Use it when you will need a new instance of a class 
+	for each actor that depends on it, like `this.injector.mapClass( 'validator', this.utils.Validator );`
+
+- `mapSingleton` is like `mapClass`, but once the instance is created, every other dependency will be filled with that 
+	same instance. This is useful for when you only want one of something, like `this.injector.mapSingleton( 'service', this.services.Facebook )`
 
 ## Legs.Events
 
