@@ -30,9 +30,9 @@ describe( 'a sample todos application', function( )
           return this.commandMap.hasEventCommand( event, command );
         },
         
-        execute : function( command )
+        execute : function( )
         {
-          this.commandMap.execute( command );
+          this.commandMap.execute.apply( this.commandMap, arguments );
         },
         
         find : function( selector )
@@ -169,6 +169,43 @@ describe( 'a sample todos application', function( )
       it( 'should be mapped to the todo entered event', function( )
       {
         expect( context.maps( context.events.TODO_ENTERED, context.commands.AddTodoCommand ) );
+      } );
+      
+      it( 'should call the todo lists add method', function( )
+      {
+        var todos = context.get( 'todos' );
+        
+        spyOn( todos, 'add' );
+        
+        context.execute( context.commands.AddTodoCommand, 'buy some beers' );
+        
+        expect( todos.add ).toHaveBeenCalled( );
+      } );
+      
+      it( 'should call the add method with a todo instance', function( )
+      {
+        var todos = context.get( 'todos' );
+        
+        spyOn( todos, 'add' );
+        
+        context.execute( context.commands.AddTodoCommand, 'buy some beers' );
+        
+        var todo = todos.add.mostRecentCall.args[ 0 ];
+        
+        expect( todo ).toBeAnInstanceOf( context.views.TodoView );
+      } );
+      
+      it( 'should set the new todos text appropriately', function( )
+      {
+        var todos = context.get( 'todos' );
+        
+        spyOn( todos, 'add' );
+        
+        context.execute( context.commands.AddTodoCommand, 'buy some beers' );
+        
+        var todo = todos.add.mostRecentCall.args[ 0 ];
+        
+        expect( todo.text( ) ).toEqual( 'buy some beers' );
       } );
     } );
   } );
@@ -425,6 +462,21 @@ describe( 'a sample todos application', function( )
       it( 'should be mapped to the correct class', function( )
       {
         expect( context.is( 'todos', context.views.TodosView ) ).toBe( true );
+      } );
+      
+      describe( 'instance methods', function( )
+      {
+        describe( 'add', function( )
+        {
+          it( 'should be defined', function( )
+          {
+            expect( view.add ).toBeType( 'function' );
+          } );
+          
+          /*
+            TODO write more specs here
+          */
+        } );
       } );
     } );
     

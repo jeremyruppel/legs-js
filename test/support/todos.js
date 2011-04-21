@@ -24,9 +24,12 @@ var TodosContext = Legs.Context.extend(
       
       AddTodoCommand : Legs.Command.extend(
         {
+          _todos : 'todos',
+          _todo : 'todo',
           execute : function( value )
           {
-            console.log( value );
+            this.todo.text( value );
+            this.todos.add( this.todo );
           }
         } )
     },
@@ -89,7 +92,12 @@ var TodosContext = Legs.Context.extend(
         
       TodosView : Legs.Actor.extend(
         {
-          element : $( '<ul class="todos"/>' )
+          element : $( '<ul class="todos"/>' ),
+          
+          add : function( )
+          {
+            
+          }
         } ),
         
       InputView : Legs.Actor.extend(
