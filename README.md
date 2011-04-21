@@ -132,7 +132,29 @@ Again, you can override this value during your tests or whenever else.
 	
 	var instance = Context.create( { contextView : $( '#another-context' ) } );
 
+## Legs.Injector
 
+**TODO**
+
+## Legs.Events
+
+**TODO**
+
+## Legs.Actor
+
+**TODO**
+
+## Legs.Command
+
+**TODO**
+
+## Legs.CommandMap
+
+**TODO**
+
+## Testing with legs-js
+
+**TODO**
 
 ## Dependencies
 
