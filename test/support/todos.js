@@ -82,6 +82,7 @@ var TodosContext = Legs.Context.extend(
             if( arguments[ 0 ] )
             {
               this.input.val( arguments[ 0 ] );
+              this.content.text( arguments[ 0 ] );
             }
             else
             {
@@ -94,9 +95,9 @@ var TodosContext = Legs.Context.extend(
         {
           element : $( '<ul class="todos"/>' ),
           
-          add : function( )
+          add : function( todo )
           {
-            
+            this.element.append( todo.element );
           }
         } ),
         
@@ -155,5 +156,7 @@ var TodosContext = Legs.Context.extend(
       this.injector.mapClass( 'todo', this.views.TodoView );
       
       this.commandMap.mapEvent( this.events.STARTUP_COMPLETE, this.commands.CreateViewsCommand );
+      
+      this.commandMap.mapEvent( this.events.TODO_ENTERED, this.commands.AddTodoCommand );
     }
   } );

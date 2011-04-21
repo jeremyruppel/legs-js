@@ -168,7 +168,7 @@ describe( 'a sample todos application', function( )
       
       it( 'should be mapped to the todo entered event', function( )
       {
-        expect( context.maps( context.events.TODO_ENTERED, context.commands.AddTodoCommand ) );
+        expect( context.maps( context.events.TODO_ENTERED, context.commands.AddTodoCommand ) ).toBe( true );
       } );
       
       it( 'should call the todo lists add method', function( )
@@ -473,9 +473,14 @@ describe( 'a sample todos application', function( )
             expect( view.add ).toBeType( 'function' );
           } );
           
-          /*
-            TODO write more specs here
-          */
+          it( 'should add a todo to the list', function( )
+          {
+            expect( view.element ).toBeEmpty( );
+            
+            view.add( context.get( 'todo' ) );
+            
+            expect( view.element ).toContain( 'li.todo' );
+          } );
         } );
       } );
     } );
