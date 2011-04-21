@@ -9,7 +9,10 @@ SOURCE = 'src/legs.js'
 # Release tasks
 # 
 desc "Generates release files"
-task :release => [ :clobber, :debug, :minify, :docco ]
+task :release => [ :clobber, :debug, :minify, :docco ] do
+  `git add .`
+  `git commit -a -m 'release version #{@version}'`
+end
 
 desc "Clobbers bin and doc directories"
 task :clobber do
@@ -34,7 +37,7 @@ task :minify => :version do
 end
 
 desc "Generates docco docs"
-task :docco do
+task :docco => :version do
   File.open "doc/legs-#{@version}.html", "w+" do |f|
     f << Rocco.new( SOURCE, [ ], { :language => 'js' } ).to_html
   end

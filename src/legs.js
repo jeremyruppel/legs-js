@@ -4,7 +4,7 @@
   //  Core
   //-----------------------------------
   
-  var Legs = this.Legs = { VERSION : '0.0.1' };
+  var Legs = this.Legs = { VERSION : '0.0.2' };
   
   //-----------------------------------
   //  Class
