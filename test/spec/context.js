@@ -141,6 +141,15 @@ describe( 'Legs.Context', function( )
       expect( spy ).toHaveBeenCalled( );
     } );
     
+    it( 'should only call the startup method once', function( )
+    {
+      var spy = jasmine.createSpy( 'startup' );
+      
+      var context = Legs.Context.create( { startup : spy } );
+      
+      expect( spy.callCount ).toEqual( 1 );
+    } );
+    
     it( 'should call the startup method if autoStartup is false', function( )
     {
       var spy = jasmine.createSpy( 'startup' );

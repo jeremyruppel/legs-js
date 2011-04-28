@@ -148,6 +148,36 @@ describe( 'Legs.Injector', function( )
 
           expect( one ).toBe( two );
         } );
+        
+        it( 'should only instantiate the new instance on demand', function( )
+        {
+          var spy = jasmine.createSpy( );
+          
+          var Class = Legs.Class.extend( { initialize : spy } );
+          
+          injector.mapSingleton( 'test', Class );
+          
+          expect( spy ).not.toHaveBeenCalled( );
+          
+          var instance = injector.getInstance( 'test' );
+          
+          expect( spy ).toHaveBeenCalled( );
+        } );
+        
+        it( 'should only instantiate the new instance once', function( )
+        {
+          var spy = jasmine.createSpy( );
+          
+          var Class = Legs.Class.extend( { initialize : spy } );
+          
+          injector.mapSingleton( 'test', Class );
+          
+          expect( spy.callCount ).toEqual( 0 );
+          
+          var instance = injector.getInstance( 'test' );
+          
+          expect( spy.callCount ).toEqual( 1 );
+        } );
       } );
 
       describe( 'injectInto', function( )

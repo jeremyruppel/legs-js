@@ -529,8 +529,9 @@ describe( 'a sample todos application', function( )
           view.element.click( );
 
           expect( view.clear ).toHaveBeenCalled( );
+          
         } );
-
+        
         it( 'should call reset when blurred', function( )
         {
           spyOn( view, 'reset' );

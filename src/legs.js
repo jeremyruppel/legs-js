@@ -33,12 +33,17 @@
     };
   };
   
+  var _initialize = true;
+  
   Legs.Class.extend = function( attributes )
   {
     // Create the new class
     var New = function( )
     {
-      this.initialize.apply( this, arguments );
+      if( _initialize )
+      {
+        this.initialize.apply( this, arguments );
+      }
     };
     
     // Clone this extend method
@@ -51,7 +56,10 @@
     New.include = this.include;
     
     // Begin building the prototype off of this class
+    // Also, make sure we don't call the initialize method if this is extending a subclass that specified one
+    _initialize = false;
     var prototype = new this( );
+    _initialize = true;
     
     // Set all of the properties on the prototype
     $.extend( true, prototype, attributes );
@@ -138,7 +146,7 @@
       
       mapValue : function( name, value )
       {
-        this.mappings[ name ] = ( function( )
+        this.mappings[ name ] = this.proxy( function( )
         {
           return value;
         } );
@@ -146,7 +154,7 @@
       
       mapClass : function( name, clazz )
       {
-        this.mappings[ name ] = ( function( )
+        this.mappings[ name ] = this.proxy( function( )
         {
           return new clazz( );
         } );
@@ -154,7 +162,7 @@
       
       mapSingleton : function( name, clazz )
       {
-        this.mappings[ name ] = ( function( )
+        this.mappings[ name ] = this.proxy( function( )
         {
           var instance = new clazz( );
           

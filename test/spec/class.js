@@ -272,6 +272,26 @@ describe( 'Legs.Class', function( )
       
       expect( constructor.mostRecentCall.object ).toBe( user );
     } );
+    
+    it( 'should not call the initialize method when extending a class', function( )
+    {
+      var constructor = jasmine.createSpy( );
+      
+      var User = Legs.Class.extend( { initialize : constructor } );
+      
+      expect( constructor ).not.toHaveBeenCalled( );
+    } );
+    
+    it( 'should not call the initialize method when extending an extended class', function( )
+    {
+      var constructor = jasmine.createSpy( );
+      
+      var Class = Legs.Class.extend( { initialize : constructor } );
+      
+      var Subclass = Class.extend( );
+      
+      expect( constructor ).not.toHaveBeenCalled( );
+    } );
   } );
   
   describe( 'instance methods', function( )
@@ -311,6 +331,19 @@ describe( 'Legs.Class', function( )
         proxy( );
         
         expect( spy ).toHaveBeenCalled( );
+      } );
+      
+      it( 'should run the proxied method only once per call', function( )
+      {
+        var spy = jasmine.createSpy( );
+        
+        var proxy = instance.proxy( spy );
+        
+        expect( spy.callCount ).toEqual( 0 );
+        
+        proxy( );
+        
+        expect( spy.callCount ).toEqual( 1 );
       } );
       
       it( 'should run the method passed in the context of that instance', function( )

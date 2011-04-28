@@ -158,6 +158,19 @@ describe( 'Legs.Events', function( )
         expect( two ).toHaveBeenCalled( );
       } );
       
+      it( 'should only trigger a mapped callback once per trigger', function( )
+      {
+        var one = jasmine.createSpy( );
+        
+        events.bind( 'test', one );
+        
+        expect( one.callCount ).toEqual( 0 );
+        
+        events.trigger( 'test' );
+        
+        expect( one.callCount ).toEqual( 1 );
+      } );
+      
       it( 'should pass all extra arguments to the callback', function( )
       {
         var spy = jasmine.createSpy( );
