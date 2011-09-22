@@ -1,0 +1,74 @@
+var Application = new Legs.Application( function( app )
+{
+  app.provide( 'Router', Legs.Router.extend(
+    {
+      '#/favorites' : 'favorites#index'
+    } ) );
+  
+  app.provide( 'Renderer', Legs.MustacheRenderer.extend(
+    {
+      'favorites' : { template : '#favorites-template', cache : true }
+    } ) );
+  
+  app.provide( 'Favorite', Legs.Model.extend(
+    {
+
+    } ) );
+  
+  app.provide( 'FavoritesController', Legs.Controller.extend(
+    {
+      setup : function( app )
+      {
+        this.before( this.find_favorites, { only : 'index' } );
+      },
+      
+      index : function( app )
+      {
+        app.render( favorites, this.favorites );
+      },
+      
+      find_favorites : function( app, proceed )
+      {
+        this.favorites = app.Favorite.all( );
+        
+        proceed( );
+      }
+    } ) );
+  
+  
+  app.provide( 'FavoriteMediator', Legs.Mediator.extend(
+    {
+      selector : '.favorite',
+      
+      events : {
+        'view#' // TODO
+      }
+      
+      /*
+        TODO two-way bindings for models?
+      */
+    } ) );
+  
+  app.provide( 'FavoriteView', Legs.View.extend(
+    {
+      
+    } ) );
+  
+  app.provide( 'AddFavoriteCommand', Legs.Command.extend(
+    {
+      event    : app.inject( app.Event ),
+      favorite : app.inject( app.Favorite ),
+      router   : app.inject( app.Router )
+      execute  : function( )
+      {
+        
+      }
+    } ) );
+  
+  app.map( '')
+  
+  app.use( app.Router );
+  app.use( app.Renderer );
+  
+  
+} );
