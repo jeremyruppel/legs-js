@@ -6,6 +6,14 @@ Bundler.require
 SOURCE = 'src/legs.js'
 
 # 
+# Build tasks
+# 
+desc "Run the coffeescript compiler"
+task :coffee do
+  sh 'coffee -w -o bin/ -c src/'
+end
+
+# 
 # Release tasks
 # 
 desc "Generates release files"

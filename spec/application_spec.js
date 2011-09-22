@@ -29,7 +29,36 @@ describe( 'Legs.Application', function( )
     } );
   } );
   
-  describe( 'provide', function( )
+  describe( 'context block', function( )
+  {
+    it( 'should run if passed as the first parameter', function( )
+    {
+      var spy = jasmine.createSpy( );
+      
+      var app = new Legs.Application( spy );
+      
+      expect( spy ).not.toHaveBeenCalled( );
+      
+      app.run( );
+      
+      expect( spy ).toHaveBeenCalled( );
+    } );
+    
+    it( 'should run if passed as the second parameter', function( )
+    {
+      var spy = jasmine.createSpy( );
+      
+      var app = new Legs.Application( '#app', spy );
+      
+      expect( spy ).not.toHaveBeenCalled( );
+      
+      app.run( );
+      
+      expect( spy ).toHaveBeenCalled( );
+    } );
+  } );
+  
+  describe( 'run', function( )
   {
     var app;
     
@@ -40,7 +69,7 @@ describe( 'Legs.Application', function( )
     
     it( 'should be defined', function( )
     {
-      
+      expect( app.run ).toBeDefined( );
     } );
     
   } );

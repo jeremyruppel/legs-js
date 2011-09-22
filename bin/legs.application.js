@@ -10,9 +10,13 @@
   (function(Legs, $) {
     return Legs.Application = (function() {
       __extends(Application, Legs.Class);
-      function Application(selector) {
+      function Application(selector, block) {
         this.selector = selector != null ? selector : 'body';
+        this.block = block != null ? block : this.selector;
       }
+      Application.prototype.run = function() {
+        return this.block.call();
+      };
       return Application;
     })();
   })(Legs, jQuery);
