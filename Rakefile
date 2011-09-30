@@ -8,9 +8,17 @@ SOURCE = 'src/legs.js'
 # 
 # Build tasks
 # 
-desc "Run the coffeescript compiler"
-task :coffee do
-  sh 'coffee -w -o bin/ -c src/'
+namespace :compile do
+  
+  desc "Watch and compile specs"
+  task :specs do
+    sh 'coffee -w -o spec/ -c src/spec/*.coffee'
+  end
+  
+  desc "Watch and compile source"
+  task :source do
+    sh 'coffee -w -o lib/ -c src/lib/*.coffee'
+  end
 end
 
 # 
