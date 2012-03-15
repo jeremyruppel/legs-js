@@ -1,0 +1,14 @@
+{
+  "author": "",
+  "name": "legs-js",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jeremyruppel/legs-js.git"
+  },
+  "engines": {
+    "node": ">=0.4.11"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
