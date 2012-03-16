@@ -1,3 +1,28 @@
+class EventEmitter
+
+  constructor : -> @listeners = { }
+
+  callbacks : ( event ) -> @listeners[ event ] ||= [ ]
+
+  on : ( event, callback ) -> @callbacks( event ).push callback
+
+  off : ( event, callback ) ->
+
+    if callback?
+      @callbacks( event ).splice @callbacks( event ).indexOf( callback ), 1
+    else
+      @off event, callback for callback in @callbacks event
+
+  once : ( event, callback ) ->
+    cb = =>
+      callback( )
+      @off event, cb
+    @on event, cb
+
+  emit : ( event ) -> callback( ) for callback in @callbacks( event )
+
+exports.EventEmitter = EventEmitter
+
 class StateMachine
 
   states = { }
