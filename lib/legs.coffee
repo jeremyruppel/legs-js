@@ -38,11 +38,11 @@ class StateMachine
   ###*
    * Instance Methods
   ###
-
-  state : ( name, callback ) ->
-    throw new Error "LegsError: No state '#{name}' declared for Legs.StateMachine" unless @states( )[ name ]?
-    throw new Error "LegsError: No callback given to state transition '#{name}'"   unless callback?
-    callback( )
+  constructor : ->
+    for state, value of @states( )
+      @[ state ] = ( callback ) ->
+        throw new Error "LegsError: No callback given to state transition '#{state}'" unless callback?
+        callback( )
 
   states : -> @constructor.states( )
 

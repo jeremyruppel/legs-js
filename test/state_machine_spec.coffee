@@ -31,11 +31,12 @@ describe 'Legs.StateMachine', ->
 
       foo = new Foo
 
-      it 'should throw an error if the state is undeclared', ->
-        ( -> foo.state 'baz' ).should.throw "LegsError: No state 'baz' declared for Legs.StateMachine"
+      it 'should have a method declared for each state', ->
+        foo.foo.should.be.ok
+        foo.bar.should.be.ok
 
       it 'should throw an error if no callback is given', ->
-        ( -> foo.state 'bar' ).should.throw "LegsError: No callback given to state transition 'bar'"
+        ( -> foo.bar( ) ).should.throw "LegsError: No callback given to state transition 'bar'"
 
       it 'should call the callback if given', ( done ) ->
-        foo.state 'bar', done
+        foo.bar done
