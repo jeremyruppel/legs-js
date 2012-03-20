@@ -1,6 +1,6 @@
-require 'should'
-Legs  = require '../lib/legs'
-{Spy} = require './support/spy'
+should = require 'should'
+sinon  = require 'sinon'
+Legs   = require '../lib/legs'
 
 describe 'Legs.EventEmitter', ->
 
@@ -20,14 +20,14 @@ describe 'Legs.EventEmitter', ->
   describe 'off', ->
 
     it 'should remove a listener for an event if specified', ->
-      spy = new Spy( )
+      spy = sinon.spy( )
 
-      foo.on 'bar', spy.fn
+      foo.on 'bar', spy
       foo.emit 'bar'
-      foo.off 'bar', spy.fn
+      foo.off 'bar', spy
       foo.emit 'bar'
 
-      spy.tally.should.equal 1
+      spy.callCount.should.equal 1
 
     it 'should remove all listeners for an event if no callback is specified', ->
       foo.on 'bar', ->
@@ -42,15 +42,15 @@ describe 'Legs.EventEmitter', ->
   describe 'once', ->
 
     it 'should attach a listener but remove it once called', ->
-      spy = new Spy( )
+      spy = sinon.spy( )
 
-      foo.once 'bar', spy.fn
+      foo.once 'bar', spy
 
       foo.emit 'bar'
       foo.emit 'bar'
       foo.emit 'bar'
 
-      spy.tally.should.equal 1
+      spy.callCount.should.equal 1
 
   describe 'emit', ->
 
@@ -58,10 +58,12 @@ describe 'Legs.EventEmitter', ->
       foo.on 'bar', done
       foo.emit 'bar'
 
-    it 'should trigger multiple listeners for the same event', ( done ) ->
-      spy = new Spy( ).expect 2, done
+    it 'should trigger multiple listeners for the same event', ->
+      spy = sinon.spy( )
 
-      foo.on 'bar', spy.fn
-      foo.on 'bar', spy.fn
+      foo.on 'bar', spy
+      foo.on 'bar', spy
 
       foo.emit 'bar'
+
+      spy.callCount.should.equal 2
