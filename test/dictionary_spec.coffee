@@ -33,6 +33,25 @@ describe 'Legs.Dictionary', ->
       @foo.set 'bar', 'baz'
       @foo.get( 'bar' ).should.equal 'baz'
 
+    it 'should be able to store object keys', ->
+      bar = { }
+      baz = { }
+      @foo.set bar, 'woot'
+      @foo.has( bar ).should.be.true
+      @foo.has( baz ).should.be.false
+
+    it 'should allow overwriting a value for an existing key', ->
+      @foo.set 'bar', 'baz'
+      @foo.set 'bar', 'woo'
+      @foo.get( 'bar' ).should.equal 'woo'
+
+    it 'should return the value that was just set', ->
+      @foo.set( 'bar', 'baz' ).should.equal 'baz'
+
+    it 'should return the value that was just overwritten', ->
+      @foo.set( 'bar', 'baz' )
+      @foo.set( 'bar', 'woo' ).should.equal 'woo'
+
   describe 'has', ->
 
     beforeEach -> @foo = new Legs.Dictionary

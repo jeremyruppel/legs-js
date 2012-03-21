@@ -1,18 +1,27 @@
 Legs = { }
 
 class Legs.Dictionary
-  constructor : -> @store = { }
+  constructor : -> @store = [ ]
 
-  get : ( key ) -> @store[ key ] || null
+  get : ( key ) ->
+    for obj in @store
+      return obj.value if obj.key is key
+    return null
 
-  set : ( key, value ) -> @store[ key ] = value
+  set : ( key, value ) ->
+    for obj in @store
+      if obj.key is key
+        return obj.value = value
+    @store.push key : key, value : value
+    return value
 
   has : ( key ) -> @get( key ) isnt null
 
   remove : ( key ) ->
-    value = @store[ key ]
-    delete  @store[ key ]
-    value
+    for obj, i in @store
+      if obj.key is key
+        @store.splice i, 1
+        return obj.value
 
 class Legs.EventEmitter
 
