@@ -1,4 +1,13 @@
-class EventEmitter
+Legs = { }
+
+class Legs.Dictionary
+  constructor : -> @store = { }
+
+  get : ( key ) -> @store[ key ] || null
+
+  set : ( key, value ) -> @store[ key ] = value
+
+class Legs.EventEmitter
 
   constructor : -> @listeners = { }
 
@@ -21,9 +30,7 @@ class EventEmitter
 
   emit : ( event ) -> callback( ) for callback in @callbacks( event )
 
-exports.EventEmitter = EventEmitter
-
-class StateMachine
+class Legs.StateMachine
 
   states = { }
 
@@ -46,4 +53,7 @@ class StateMachine
 
   states : -> @constructor.states( )
 
-exports.StateMachine = StateMachine
+###*
+ * export
+###
+module.exports = Legs
