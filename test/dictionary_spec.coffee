@@ -32,3 +32,28 @@ describe 'Legs.Dictionary', ->
     it 'should store the key value pair given', ->
       @foo.set 'bar', 'baz'
       @foo.get( 'bar' ).should.equal 'baz'
+
+  describe 'has', ->
+
+    beforeEach -> @foo = new Legs.Dictionary
+
+    it 'should return true if the key has been set', ->
+      @foo.set 'bar', 'baz'
+      @foo.has( 'bar' ).should.be.true
+
+    it 'should return false if the key has not been set', ->
+      @foo.remove 'bar'
+      @foo.has( 'bar' ).should.be.false
+
+  describe 'remove', ->
+
+    beforeEach -> @foo = new Legs.Dictionary
+
+    it 'should remove a key that has been set', ->
+      @foo.set 'bar', 'baz'
+      @foo.remove 'bar'
+      @foo.has( 'bar' ).should.be.false
+
+    it 'should return the value for the key that was removed', ->
+      @foo.set 'bar', 'baz'
+      @foo.remove( 'bar' ).should.equal 'baz'

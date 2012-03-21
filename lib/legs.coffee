@@ -7,6 +7,13 @@ class Legs.Dictionary
 
   set : ( key, value ) -> @store[ key ] = value
 
+  has : ( key ) -> @get( key ) isnt null
+
+  remove : ( key ) ->
+    value = @store[ key ]
+    delete  @store[ key ]
+    value
+
 class Legs.EventEmitter
 
   constructor : -> @listeners = { }
