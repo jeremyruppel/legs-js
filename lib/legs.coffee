@@ -54,20 +54,28 @@ class Legs.StateMachine
    * Class Methods
   ###
 
-  @state : ( name ) -> @states( )[ name ] = true
+  @state : ( name, initial=false ) -> @states( )[ name ] = initial
 
   @states : -> if states.has @ then states.get @ else states.set @, { }
+
+  @initial : ->
+    for name, initial of @states( )
+      return name if initial is true
+    return false
 
   ###*
    * Instance Methods
   ###
-  constructor : ->
+  constructor : ( initial ) ->
     for state, value of @states( )
       @[ state ] = ( callback ) ->
         throw new Error "LegsError: No callback given to state transition '#{state}'" unless callback?
         callback( )
 
-  states : -> @constructor.states( )
+    @state = initial || @initial( )
+
+  states  : -> @constructor.states( )
+  initial : -> @constructor.initial( )
 
 ###*
  * export

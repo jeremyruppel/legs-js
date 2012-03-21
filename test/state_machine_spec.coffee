@@ -27,6 +27,43 @@ describe 'Legs.StateMachine', ->
       it 'should return the states object defined on the class', ->
         new Foo( ).states( ).should.equal Foo.states( )
 
+    describe 'initial state', ->
+
+      it 'can be defined on the class', ->
+        class Foo extends Legs.StateMachine
+          @state 'foo', true
+          @state 'bar'
+
+        new Foo( ).state.should.equal 'foo'
+
+      it 'can be inspected on the class', ->
+        class Foo extends Legs.StateMachine
+          @state 'foo', true
+          @state 'bar'
+
+        Foo.initial( ).should.equal 'foo'
+
+      it 'can be inspected on the instance', ->
+        class Foo extends Legs.StateMachine
+          @state 'foo', true
+          @state 'bar'
+
+        new Foo( ).initial( ).should.equal 'foo'
+
+      it 'can be passed to the constructor', ->
+        class Foo extends Legs.StateMachine
+          @state 'foo'
+          @state 'bar'
+
+        new Foo( 'bar' ).state.should.equal 'bar'
+
+      it 'should prefer the constructor', ->
+        class Foo extends Legs.StateMachine
+          @state 'foo', true
+          @state 'bar'
+
+        new Foo( 'bar' ).state.should.equal 'bar'
+
     describe 'state', ->
 
       foo = new Foo
