@@ -6,11 +6,10 @@ describe 'Legs.StateMachine', ->
   it 'should be defined', ->
     Legs.StateMachine.should.be.ok
 
-  class Foo extends Legs.StateMachine
-    @state 'foo', true
-    @state 'bar'
-
   describe 'class methods', ->
+    class Foo extends Legs.StateMachine
+      @state 'foo'
+      @state 'bar'
 
     describe 'state', ->
 
@@ -23,6 +22,9 @@ describe 'Legs.StateMachine', ->
   describe 'instance methods', ->
 
     describe 'states', ->
+      class Foo extends Legs.StateMachine
+        @state 'foo', true
+        @state 'bar'
 
       it 'should return the states object defined on the class', ->
         new Foo( ).states( ).should.equal Foo.states( )
@@ -86,15 +88,24 @@ describe 'Legs.StateMachine', ->
         ( -> new Foo 'baz' ).should.throw "LegsError: No state 'baz' declared for Legs.StateMachine"
 
     describe 'state', ->
+      class Foo extends Legs.StateMachine
+        @state 'foo', true
+        @state 'bar'
 
-      foo = new Foo
+      beforeEach -> @foo = new Foo
 
       it 'should have a method declared for each state', ->
-        foo.foo.should.be.ok
-        foo.bar.should.be.ok
+        @foo.foo.should.be.ok
+        @foo.bar.should.be.ok
 
       it 'should throw an error if no callback is given', ->
-        ( -> foo.bar( ) ).should.throw "LegsError: No callback given to state transition 'bar'"
+        ( => @foo.bar( ) ).should.throw "LegsError: No callback given to state transition 'bar'"
 
       it 'should call the callback if given', ( done ) ->
-        foo.bar done
+        @foo.bar done
+
+      it 'should change the state of the state machine', ( done ) ->
+        @foo.state.should.equal 'foo'
+        @foo.bar =>
+          @foo.state.should.equal 'bar'
+          done( )

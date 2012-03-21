@@ -72,6 +72,7 @@ class Legs.StateMachine
     for state, value of @states( )
       @[ state ] = ( callback ) ->
         throw new Error "LegsError: No callback given to state transition '#{state}'" unless callback?
+        @state = state
         callback( )
 
     @state = initial || @initial( )
