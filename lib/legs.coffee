@@ -48,7 +48,7 @@ class Legs.EventEmitter
 
 class Legs.StateMachine
 
-  states = { }
+  states = new Legs.Dictionary
 
   ###*
    * Class Methods
@@ -56,7 +56,7 @@ class Legs.StateMachine
 
   @state : ( name ) -> @states( )[ name ] = true
 
-  @states : -> states[ @ ] ||= { }
+  @states : -> if states.has @ then states.get @ else states.set @, { }
 
   ###*
    * Instance Methods
