@@ -54,7 +54,9 @@ class Legs.StateMachine
    * Class Methods
   ###
 
-  @state : ( name, initial=false ) -> @states( )[ name ] = initial
+  @state : ( name, initial=false ) ->
+    throw new Error "LegsError: More than one initial state declared for Legs.StateMachine" if initial and @initial( )
+    @states( )[ name ] = initial
 
   @states : -> if states.has @ then states.get @ else states.set @, { }
 
@@ -73,6 +75,9 @@ class Legs.StateMachine
         callback( )
 
     @state = initial || @initial( )
+
+    throw new Error "LegsError: No initial state provided for Legs.StateMachine" if @state is false
+    throw new Error "LegsError: No state '#{@state}' declared for Legs.StateMachine" unless @states( )[ @state ]?
 
   states  : -> @constructor.states( )
   initial : -> @constructor.initial( )

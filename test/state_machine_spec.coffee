@@ -7,7 +7,7 @@ describe 'Legs.StateMachine', ->
     Legs.StateMachine.should.be.ok
 
   class Foo extends Legs.StateMachine
-    @state 'foo'
+    @state 'foo', true
     @state 'bar'
 
   describe 'class methods', ->
@@ -63,6 +63,27 @@ describe 'Legs.StateMachine', ->
           @state 'bar'
 
         new Foo( 'bar' ).state.should.equal 'bar'
+
+      it 'should throw an error if not declared or passed', ->
+        class Foo extends Legs.StateMachine
+          @state 'foo'
+          @state 'bar'
+
+        ( -> new Foo ).should.throw "LegsError: No initial state provided for Legs.StateMachine"
+
+      it 'should throw an error if more than one', ->
+        ( ->
+          class Foo extends Legs.StateMachine
+            @state 'foo', true
+            @state 'bar', true
+        ).should.throw "LegsError: More than one initial state declared for Legs.StateMachine"
+
+      it 'should throw an error if an undeclared state is passed', ->
+        class Foo extends Legs.StateMachine
+          @state 'foo'
+          @state 'bar'
+
+        ( -> new Foo 'baz' ).should.throw "LegsError: No state 'baz' declared for Legs.StateMachine"
 
     describe 'state', ->
 
