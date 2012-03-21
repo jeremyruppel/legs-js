@@ -36,7 +36,18 @@ describe 'Legs.Dictionary', ->
     it 'should be able to store object keys', ->
       bar = { }
       baz = { }
-      @foo.set bar, 'woot'
+      @foo.set bar, 'woo'
+      @foo.has( bar ).should.be.true
+      @foo.has( baz ).should.be.false
+
+    it 'should be able to store class keys', ->
+      bar = class Foo
+      baz = class Foo
+
+      bar.toString( ).should.equal baz.toString( )
+      bar.should.not.equal baz
+
+      @foo.set bar, 'woo'
       @foo.has( bar ).should.be.true
       @foo.has( baz ).should.be.false
 
